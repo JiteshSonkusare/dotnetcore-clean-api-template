@@ -1,0 +1,68 @@
+﻿using MediatR;
+using Asp.Versioning;
+using Wrapper = Shared.Wrapper;
+using CCFCleanAPITemplate.EndpointDefinition;
+using Application.Features.Users.Queries.GetAll;
+using Application.Features.Users.Queries.GetById;
+using CCFCleanAPITemplate.OpenApi.Summaries.User;
+using CCFCleanAPITemplate.EndpointDefinition.Models;
+using Application.Features.Users.Queries.ViewModels;
+using Application.Features.Users.Commands.UpsertUser;
+using Application.Features.Users.Commands.DeleteUser;
+
+namespace CCFCleanAPITemplate.Endpoints.V1;
+
+public class UserEndpointDefinition : IEndpointDefinition
+{
+    public void DefineEndpoints(AppBuilderDefinition builderDefination)
+    {
+        builderDefination.App
+            .MapGet("v{version:apiVersion}/user/users", Users)
+            .GetAllUserEndpointSummary<Wrapper.Result<List<UserViewModel>>>()
+            .WithApiVersionSet(builderDefination.ApiVersionSet)
+            .MapToApiVersion(new ApiVersion(1));
+
+        builderDefination.App
+            .MapGet("v{version:apiVersion}/user/{id}", GetUserById)
+            .GetAllUserEndpointSummary<Wrapper.Result<UserViewModel>>()
+            .WithApiVersionSet(builderDefination.ApiVersionSet)
+            .MapToApiVersion(new ApiVersion(1));
+
+        builderDefination.App
+            .MapPost("v{version:apiVersion}/user/upsert", UpsertUser)
+            .GetAllUserEndpointSummary<Wrapper.Result<Guid>>()
+            .WithApiVersionSet(builderDefination.ApiVersionSet)
+            .MapToApiVersion(new ApiVersion(1));
+
+        builderDefination.App
+           .MapDelete("v{version:apiVersion}/user/delete/{id}", DeleteUser)
+           .GetAllUserEndpointSummary<Wrapper.Result<Guid>>()
+           .WithApiVersionSet(builderDefination.ApiVersionSet)
+           .MapToApiVersion(new ApiVersion(1));
+    }
+
+    public void DefineServices(WebApplicationBuilder builder)
+    {
+
+    }
+
+    private async Task<IResult> Users(IMediator mediator)
+    {
+        return Results.Ok(await mediator.Send(new GetAllUserQuery()));
+    }
+
+    private async Task<IResult> GetUserById(IMediator mediator, Guid id)
+    {
+        return Results.Ok(await mediator.Send(new GetUserByIdQuery() { Id = id }));
+    }
+
+    private async Task<IResult> UpsertUser(IMediator mediator, UpsertUserCommand upsertUserCommand)
+    {
+        return Results.Ok(await mediator.Send(upsertUserCommand));
+    }
+
+    private async Task<IResult> DeleteUser(IMediator mediator, Guid id)
+    {
+        return Results.Ok(await mediator.Send(new DeleteUserCommand() { Id = id }));
+    }
+}

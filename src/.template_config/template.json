@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Jitesh Sonkusare",
+  "classifications": [ "Web","WebAPI","CCF" ],
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "identity": "CCFCleanAPITemplate",
+  "name": "CCF Clean API",
+  "description": "A ready-to-use project template for creating ASP.NET core minimal api which supports cqrs, mediatR, repositories, models mapping, validations, DI, swagger and api versioning.",
+  "shortName": "ccf-cleanapi",
+  "sourceName": "CCFCleanAPITemplate",
+  "symbols": {
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips the automatic restore of the project on create.",
+      "defaultValue": "false"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [ "src/.vs/**", ".template_config/**" ]
+        }
+      ]
+    }
+  ]
+}
