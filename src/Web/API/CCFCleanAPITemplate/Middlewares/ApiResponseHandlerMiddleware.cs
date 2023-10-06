@@ -24,7 +24,6 @@ public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
             or NullReferenceException
             or TaskCanceledException
             or ApiException
-            or NotFoundException
                 => HttpStatusCode.BadRequest,
             InvalidOperationException
                 => HttpStatusCode.BadGateway,

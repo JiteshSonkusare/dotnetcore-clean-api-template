@@ -1,5 +1,4 @@
 ﻿using Domain.ViewModels;
-using Microsoft.AspNetCore.Mvc;
 using CCFCleanAPITemplate.OpenApi.Summaries.Base;
 
 namespace CCFCleanAPITemplate.OpenApi.Summaries.User;
@@ -16,7 +15,7 @@ public static class UserEndpointAttributeSummaries
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
                        new SwaggerResponseAttributeExt(400, null, typeof(FailureResponse)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ProblemDetails))
+                       new SwaggerResponseAttributeExt(404, null, typeof(FailureResponse))
                    });
     }
 }

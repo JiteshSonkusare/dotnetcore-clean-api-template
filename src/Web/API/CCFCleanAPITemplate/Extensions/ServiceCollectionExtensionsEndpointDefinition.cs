@@ -1,6 +1,9 @@
 ﻿using NLog.Web;
+using Infrastructure.Context;
 using Application.Extensions;
+using Shared.ApiClientHanlder;
 using Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore;
 using CCFCleanAPITemplate.Middlewares;
 using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
@@ -11,9 +14,12 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
 {
     public void DefineEndpoints(AppBuilderDefinition builderDefination)
     {
-        if (builderDefination.App.Environment.IsDevelopment())
-            builderDefination.App.Services.MigrateDatabase();
         builderDefination.App.UseMiddleware<ApiResponseHandlerMiddleware>();
+        
+        if (builderDefination.App.Environment.IsDevelopment())
+            builderDefination.App.Services.CreateScope()
+                .ServiceProvider.GetRequiredService<ApplicationDBContext>()
+                .Database.EnsureCreated();
     }
 
     public void DefineServices(WebApplicationBuilder builder)
@@ -21,6 +27,8 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
         builder.Host.UseNLog();
         builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
         builder.Services.RegisterInfrastructureDependencies(builder.Configuration)
-                        .RegisterApplicationDependencies();
+                        .RegisterApplicationDependencies()
+                        .RegisterSharedDependencies()
+                        .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using MediatR;
+﻿using MediatR;
 using FluentValidation;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions;
