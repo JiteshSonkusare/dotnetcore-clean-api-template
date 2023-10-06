@@ -1,9 +1,9 @@
 ﻿using NLog.Web;
 using Application.Extensions;
 using Infrastructure.Extensions;
-using CCFCleanAPITemplate.EndpointDefinition.Models;
-using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.Middlewares;
+using CCFCleanAPITemplate.EndpointDefinition;
+using CCFCleanAPITemplate.EndpointDefinition.Models;
 
 namespace CCFCleanAPITemplate.Extensions;
 

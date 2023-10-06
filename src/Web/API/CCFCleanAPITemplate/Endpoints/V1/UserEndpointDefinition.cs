@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Asp.Versioning;
 using Wrapper = Shared.Wrapper;
+using Infrastructure.Respositories;
+using Application.Interfaces.Repositories;
 using CCFCleanAPITemplate.EndpointDefinition;
 using Application.Features.Users.Queries.GetAll;
 using Application.Features.Users.Queries.GetById;
@@ -43,7 +45,7 @@ public class UserEndpointDefinition : IEndpointDefinition
 
     public void DefineServices(WebApplicationBuilder builder)
     {
-
+        builder.Services.AddTransient<IUserRepository, UserRepository>();
     }
 
     private async Task<IResult> Users(IMediator mediator)

@@ -16,7 +16,6 @@ public static class ServiceCollectionExtensions
         return services
                 .AddTransient<IDateTimeService, SystemDateTimeService>()
                 .AddTransient(typeof(IRepositoryAsync<,>), typeof(RepositoryAsync<,>))
-                .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
                 .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
     }
