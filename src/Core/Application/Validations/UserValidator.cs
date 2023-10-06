@@ -1,16 +1,13 @@
 ﻿using FluentValidation;
+using Application.Interfaces.Repositories;
 using Application.Features.Users.Commands.UpsertUser;
 
 namespace Application.Validations;
 
 public class UserValidator : AbstractValidator<UpsertUserCommand>
 {
-    public UserValidator()
+    public UserValidator(IUserRepository userRepository)
     {
-        RuleFor(u => u.UserId)
-            .NotEmpty()
-            .WithMessage("UserId should not be null/empty.");
-
         RuleFor(u => u.FirstName)
             .NotEmpty()
             .WithMessage("FirstName should not be null/empty.");
@@ -22,5 +19,14 @@ public class UserValidator : AbstractValidator<UpsertUserCommand>
         RuleFor(u => u.Mobile)
             .NotEmpty()
             .WithMessage("Mobile should not be null/empty.");
+
+        RuleFor(u => u.UserId)
+            .NotEmpty()
+            .WithMessage("User should not be null/empty.")
+            .MustAsync(async (userId, cancellation) =>
+            {
+                bool exists = await userRepository.UserIdExists(userId);
+                return !exists;
+            }).WithMessage("User Id must be unique.");
     }
 }

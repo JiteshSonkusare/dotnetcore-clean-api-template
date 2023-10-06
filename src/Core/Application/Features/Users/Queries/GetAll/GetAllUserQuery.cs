@@ -25,10 +25,6 @@ internal class GetUserQueryHandler : IRequestHandler<GetAllUserQuery, Result<Lis
 
     public async Task<Result<List<UserViewModel>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
     {
-        //var failures = new FailureResponse() { Type = "test_type", Status = "404", Error = "test_error", ErrorDescription = "test_error_description" };
-
-        //throw new Exception(failures.ToString());
-
         try
         {
             var user = await _unitOfWork.Repository<User>().GetAllAsync();

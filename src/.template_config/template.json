@@ -4,12 +4,12 @@
   "classifications": [ "Web","WebAPI","CCF" ],
   "tags": {
     "language": "C#",
-    "type": "solution"
+    "type": "project"
   },
-  "identity": "CCFCleanAPITemplate",
-  "name": "CCF Clean API",
-  "description": "A ready-to-use project template for creating ASP.NET core minimal api which supports cqrs, mediatR, repositories, models mapping, validations, DI, swagger and api versioning.",
-  "shortName": "ccf-cleanapi",
+  "identity": "CCFClean.WebApi.CSharp",
+  "name": "CCF Clean WebAPI",
+  "description": "A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Logging Swagger and API versioning 2.",
+  "shortName": "CCFClean.WebApi",
   "sourceName": "CCFCleanAPITemplate",
   "symbols": {
     "skipRestore": {
