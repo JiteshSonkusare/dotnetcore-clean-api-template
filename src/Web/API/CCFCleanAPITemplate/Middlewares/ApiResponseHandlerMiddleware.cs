@@ -6,9 +6,6 @@ using System.Security.Authentication;
 
 namespace CCFCleanAPITemplate.Middlewares;
 
-/// <summary>
-/// This is the sample hanlder middleware class, you can create your own to handle your application responses.
-/// </summary>
 public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
 {
     public ApiResponseHandlerMiddleware(RequestDelegate next) : base(next) { }
