@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Shared.Wrapper;
 using Domain.Entities;
 using Application.Features.Users.Queries.ViewModels;
 using Application.Features.Users.Commands.UpsertUser;
-using Shared.Wrapper;
 
 namespace Application.Mappings;
 

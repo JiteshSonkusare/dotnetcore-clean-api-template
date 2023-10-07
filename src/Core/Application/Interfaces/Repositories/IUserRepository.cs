@@ -1,6 +1,6 @@
-﻿using Application.Features.Users.Queries.ViewModels;
-using Shared.Wrapper;
+﻿using Shared.Wrapper;
 using Shared.ApiClientHanlder;
+using Application.Features.Users.Queries.ViewModels;
 
 namespace Application.Interfaces.Repositories;
 
