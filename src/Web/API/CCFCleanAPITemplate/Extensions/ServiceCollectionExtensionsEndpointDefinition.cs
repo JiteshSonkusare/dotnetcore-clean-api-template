@@ -14,8 +14,9 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
 {
     public void DefineEndpoints(AppBuilderDefinition builderDefination)
     {
-        builderDefination.App.UseMiddleware<ApiResponseHandlerMiddleware>();
-        
+        builderDefination.App.UseMiddleware<ApiResponseHandlerMiddleware>()
+                             .UseCors();
+
         if (builderDefination.App.Environment.IsDevelopment())
             builderDefination.App.Services.CreateScope()
                 .ServiceProvider.GetRequiredService<ApplicationDBContext>()
@@ -29,6 +30,15 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
         builder.Services.RegisterInfrastructureDependencies()
                         .RegisterApplicationDependencies()
                         .RegisterSharedDependencies()
-                        .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+                        .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")))
+                        .AddCors(options =>
+                        {
+                            options.AddDefaultPolicy(policy =>
+                            {
+                                policy.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader();
+                            });
+                        });
     }
 }
