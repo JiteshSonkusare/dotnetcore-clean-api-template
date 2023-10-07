@@ -5,6 +5,8 @@ using Domain.Configs.User;
 using Shared.ApiClientHanlder;
 using Microsoft.EntityFrameworkCore;
 using Application.Interfaces.Repositories;
+using Application.Features.Users.Queries.ViewModels;
+using Shared.Wrapper;
 
 namespace Infrastructure.Respositories;
 
@@ -26,7 +28,7 @@ public class UserRepository : IUserRepository
         return await _repository.Entities.AnyAsync(b => b.UserId == userId);
     }
 
-    public async Task<Response<string>> GetUsersFromApiCall(CancellationToken cancellation)
+    public async Task<Response<Result<List<UserViewModel>>>> GetUsersFromApiCall(CancellationToken cancellation)
     {
         try
         {
@@ -42,7 +44,7 @@ public class UserRepository : IUserRepository
                 },
                 cancellation);
 
-            return new Response<string>(result, result.StatusCode);
+            return new Response<Result<List<UserViewModel>>>(result, result.StatusCode);
         }
         catch (Exception ex)
         {
