@@ -2,22 +2,31 @@
 
 namespace Domain.ViewModels;
 
-public class FailureResponse
+public record FailureResponse
 {
-    [JsonPropertyName("type")]
-    public string? Type { get; set; }
-
+    /// <summary>
+    /// HttpStatus
+    /// </summary>
     [JsonPropertyName("status")]
-    public string? Status { get; set; }
+    public int? Status { get; set; }
 
+    /// <summary>
+    /// Exception Source
+    /// </summary>
+    [JsonPropertyName("source")]
+    public string? Source { get; set; }
+
+    /// <summary>
+    /// Exception Message
+    /// </summary>
     [JsonPropertyName("error")]
     public string? Error { get; set; }
 
+    /// <summary>
+    /// Exception StackTrace
+    /// </summary>
     [JsonPropertyName("error_description")]
     public string? ErrorDescription { get; set; }
 
-    [JsonExtensionData]
-    public IDictionary<string, object?> Extensions { get; set; } = new Dictionary<string, object?>(StringComparer.Ordinal);
-
-    public override string ToString() => $"type:{Type}|status:{Status}|error:{Error}|error_description:{ErrorDescription}|extensions:{Extensions}";
+    public override string ToString() => $"status:{Status}|source:{Source}|error:{Error}|error_description:{ErrorDescription}";
 }

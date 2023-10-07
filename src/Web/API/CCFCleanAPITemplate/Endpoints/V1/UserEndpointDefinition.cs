@@ -26,26 +26,27 @@ public class UserEndpointDefinition : IEndpointDefinition
 
         builderDefination.App
             .MapGet("v{version:apiVersion}/user/{id}", GetUserById)
-            .GetAllUserEndpointSummary<Wrapper.Result<UserViewModel>>()
+            .GetUserByIdEndpointSummary<Wrapper.Result<UserViewModel>>()
             .WithApiVersionSet(builderDefination.ApiVersionSet)
             .MapToApiVersion(new ApiVersion(1));
 
         builderDefination.App
             .MapPost("v{version:apiVersion}/user/upsert", UpsertUser)
-            .GetAllUserEndpointSummary<Wrapper.Result<Guid>>()
+            .UpsertUserEndpointSummary<Wrapper.Result<Guid>>()
             .WithApiVersionSet(builderDefination.ApiVersionSet)
             .MapToApiVersion(new ApiVersion(1));
 
         builderDefination.App
            .MapDelete("v{version:apiVersion}/user/delete/{id}", DeleteUser)
-           .GetAllUserEndpointSummary<Wrapper.Result<Guid>>()
+           .DeleteUserEndpointSummary<Wrapper.Result<Guid>>()
            .WithApiVersionSet(builderDefination.ApiVersionSet)
            .MapToApiVersion(new ApiVersion(1));
     }
 
     public void DefineServices(WebApplicationBuilder builder)
     {
-        builder.Services.AddTransient<IUserRepository, UserRepository>();
+        builder.Services
+            .AddTransient<IUserRepository, UserRepository>();
     }
 
     private async Task<IResult> Users(IMediator mediator)

@@ -2,11 +2,11 @@
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Commands.UpsertUser;
 
-namespace Application.Validations;
+namespace Application.Validations.User;
 
-public class UserValidator : AbstractValidator<UpsertUserCommand>
+public class UpsertUserValidator : AbstractValidator<UpsertUserCommand>
 {
-    public UserValidator(IUserRepository userRepository)
+    public UpsertUserValidator(IUserRepository userRepository)
     {
         RuleFor(u => u.FirstName)
             .NotEmpty()

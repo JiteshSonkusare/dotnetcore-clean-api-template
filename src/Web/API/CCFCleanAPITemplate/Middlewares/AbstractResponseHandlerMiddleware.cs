@@ -35,11 +35,11 @@ public abstract class AbstractResponseHandlerMiddleware
         }
         catch (ValidationException exception)
         {
-            var failures = new FailureResponse
+            var failures = new ValidationFailureResponse
             {
                 Type = "ValidationFailure",
                 Status = StatusCodes.Status400BadRequest.ToString(),
-                Error = exception.Message
+                Message = exception.Message
             };
 
             if (exception.Errors is not null)

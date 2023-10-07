@@ -28,11 +28,11 @@ public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
                 => HttpStatusCode.InternalServerError,
         };
 
-        var failureResponse = GetFailureResponse(exception.Message);
+        var failureResponse = GetFailureResponse(code, exception.Message);
         return (code, JsonSerializer.Serialize(failureResponse));
     }
 
-    private static FailureResponse GetFailureResponse(string exception)
+    private static FailureResponse GetFailureResponse(HttpStatusCode code, string exception)
     {
         if (string.IsNullOrWhiteSpace(exception))
             return default!;
@@ -40,19 +40,15 @@ public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
         var exceptionData = exception
                 .Split('|')
                 .Select(segment => segment.Split(':'))
-                .Where(parts => parts.Length == 2 && !(parts[0] == "extensions" && parts[1].StartsWith("System.Collections.Generic.Dictionary")))
                 .ToDictionary(parts => parts[0], parts => parts[1]);
 
         var failureResponse = new FailureResponse
         {
-            Type = exceptionData.TryGetValue("type", out string? type) ? type : string.Empty,
-            Status = exceptionData.TryGetValue("status", out string? status) ? status : string.Empty,
+            Status = (int)code,
+            Source = exceptionData.TryGetValue("source", out string? source) ? source : string.Empty,
             Error = exceptionData.TryGetValue("error", out string? error) ? error : string.Empty,
             ErrorDescription = exceptionData.TryGetValue("error_description", out string? errorDescription) ? errorDescription : string.Empty,
         };
-
-        if (exceptionData.ContainsKey("extensions"))
-            failureResponse.Extensions["details"] = exceptionData.TryGetValue("extensions", out string? extensions) ? extensions : string.Empty;
 
         return failureResponse;
     }

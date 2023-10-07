@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Asp.Versioning;
+using Domain.Configs.User;
 using Wrapper = Shared.Wrapper;
 using CCFCleanAPITemplate.EndpointDefinition;
 using Application.Features.Users.Queries.GetAll;
 using CCFCleanAPITemplate.OpenApi.Summaries.User;
-using Application.Features.Users.Queries.GetById;
-using Application.Features.Users.Queries.ViewModels;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
+using Application.Features.Users.Queries.GetByAPI;
 
 namespace CCFCleanAPITemplate.Endpoints.V2;
 
@@ -16,29 +16,22 @@ public class UserEndpointDefinition : IEndpointDefinition
     {
         builderDefination.App
             .MapGet("v{version:apiVersion}/user/users", Users)
-            .GetAllUserEndpointSummary<Wrapper.Result<List<UserViewModel>>>()
+            .GetUserFromApiEndpointSummary<Wrapper.Result<string>>()
             .WithApiVersionSet(builderDefination.ApiVersionSet)
             .MapToApiVersion(new ApiVersion(2));
 
-        builderDefination.App
-            .MapGet("v{version:apiVersion}/user/{id}", GetUserById)
-            .GetAllUserEndpointSummary<Wrapper.Result<UserViewModel>>()
-            .WithApiVersionSet(builderDefination.ApiVersionSet)
-            .MapToApiVersion(new ApiVersion(2));
     }
 
     public void DefineServices(WebApplicationBuilder builder)
     {
-
+        builder.Services.AddSingleton(new UserConfig
+        {
+            BaseURL = builder.Configuration["UserConfig:BaseURL"]
+        });
     }
 
     private async Task<IResult> Users(IMediator mediator)
     {
-        return Results.Ok(await mediator.Send(new GetAllUserQuery()));
-    }
-
-    private async Task<IResult> GetUserById(IMediator mediator, Guid id)
-    {
-        return Results.Ok(await mediator.Send(new GetUserByIdQuery() { Id = id }));
+        return Results.Ok(await mediator.Send(new GetUserByAPIQuery()));
     }
 }

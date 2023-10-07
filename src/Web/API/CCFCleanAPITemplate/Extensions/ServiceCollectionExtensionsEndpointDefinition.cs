@@ -26,7 +26,7 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
     {
         builder.Host.UseNLog();
         builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
-        builder.Services.RegisterInfrastructureDependencies(builder.Configuration)
+        builder.Services.RegisterInfrastructureDependencies()
                         .RegisterApplicationDependencies()
                         .RegisterSharedDependencies()
                         .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
