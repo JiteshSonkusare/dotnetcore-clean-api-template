@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using Shared.Wrapper;
+using System.Net.Mime;
 using Domain.Entities;
 using Domain.ViewModels;
 using Domain.Configs.User;
@@ -6,7 +7,6 @@ using Shared.ApiClientHanlder;
 using Microsoft.EntityFrameworkCore;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.ViewModels;
-using Shared.Wrapper;
 
 namespace Infrastructure.Respositories;
 
