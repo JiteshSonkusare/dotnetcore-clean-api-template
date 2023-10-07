@@ -3,10 +3,9 @@ using Asp.Versioning;
 using Domain.Configs.User;
 using Wrapper = Shared.Wrapper;
 using CCFCleanAPITemplate.EndpointDefinition;
-using Application.Features.Users.Queries.GetAll;
 using CCFCleanAPITemplate.OpenApi.Summaries.User;
-using CCFCleanAPITemplate.EndpointDefinition.Models;
 using Application.Features.Users.Queries.GetByAPI;
+using CCFCleanAPITemplate.EndpointDefinition.Models;
 
 namespace CCFCleanAPITemplate.Endpoints.V2;
 
