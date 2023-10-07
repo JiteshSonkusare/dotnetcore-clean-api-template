@@ -6,6 +6,7 @@ using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.OpenApi.Summaries.User;
 using Application.Features.Users.Queries.GetByAPI;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
+using Application.Features.Users.Queries.ViewModels;
 
 namespace CCFCleanAPITemplate.Endpoints.V2;
 
@@ -15,10 +16,9 @@ public class UserEndpointDefinition : IEndpointDefinition
     {
         builderDefination.App
             .MapGet("v{version:apiVersion}/user/users", Users)
-            .GetUserFromApiEndpointSummary<Wrapper.Result<string>>()
+            .GetUserFromApiEndpointSummary<Wrapper.Result<List<UserViewModel>>>()
             .WithApiVersionSet(builderDefination.ApiVersionSet)
             .MapToApiVersion(new ApiVersion(2));
-
     }
 
     public void DefineServices(WebApplicationBuilder builder)

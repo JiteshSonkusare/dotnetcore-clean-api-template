@@ -12,10 +12,10 @@ namespace Infrastructure.Respositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly UserConfig _userConfig;
-    private readonly IApiClientWrapper _apiClientWrapper;
     private readonly IRepositoryAsync<User, Guid> _repository;
-
+    private readonly IApiClientWrapper _apiClientWrapper;
+    private readonly UserConfig _userConfig;
+    
     public UserRepository(IRepositoryAsync<User, Guid> repository, IApiClientWrapper apiClientWrapper, UserConfig userConfig)
     {
         _repository = repository;
@@ -48,8 +48,7 @@ public class UserRepository : IUserRepository
         }
         catch (Exception ex)
         {
-            var failure = new FailureResponse { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message };
-            throw new Exception(failure.ToString());
+            throw new Exception(new FailureResponse { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
         }
     }
 }

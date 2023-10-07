@@ -4,7 +4,7 @@ namespace CCFCleanAPITemplate.EndpointDefinition;
 
 public interface IEndpointDefinition
 {
-    void DefineServices(WebApplicationBuilder Builder);
+    void DefineServices(WebApplicationBuilder builder);
 
     void DefineEndpoints(AppBuilderDefinition builderDefination);
 }

@@ -14,7 +14,6 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
 {
     private readonly IUnitOfWork<Guid> _unitOfWork;
 
-
     public DeleteUserCommandHandler(IUnitOfWork<Guid> unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -26,7 +25,7 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
         if (user != null)
         {
             await _unitOfWork.Repository<User>().DeleteAsync(user);
-            await _unitOfWork.CommitAsync(cancellationToken);
+            await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
             return await Result<Guid>.SuccessAsync(user.Id, "User Deleted");
         }
         else

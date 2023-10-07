@@ -1,8 +1,7 @@
-﻿namespace Domain.Enums
+﻿namespace Domain.Enums;
+
+public enum UserStatus
 {
-    public enum UserStatus
-    {
-        Active = 0,
-        Inactive = 1,
-    }
+    Active = 0,
+    Inactive = 1,
 }

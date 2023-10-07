@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Services;
 using Infrastructure.Respositories;
 using Application.Common.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Application.Interfaces.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 

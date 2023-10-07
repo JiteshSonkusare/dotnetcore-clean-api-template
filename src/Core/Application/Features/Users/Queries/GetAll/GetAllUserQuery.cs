@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using LazyCache;
 using AutoMapper;
 using Shared.Wrapper;
 using Domain.Entities;
@@ -16,21 +17,24 @@ internal class GetUserQueryHandler : IRequestHandler<GetAllUserQuery, Result<Lis
 {
     private readonly IUnitOfWork<Guid> _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IAppCache _cache;
 
-    public GetUserQueryHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
+    public GetUserQueryHandler(IMapper mapper, IUnitOfWork<Guid> unitOfWork, IAppCache cache)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _cache = cache;
     }
 
     public async Task<Result<List<UserViewModel>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            var user = await _unitOfWork.Repository<User>().GetAllAsync();
-            if (user.Count == 0)
+            Task<List<User>> getAllUsers() => _unitOfWork.Repository<User>().GetAllAsync();
+            var users = await _cache.GetOrAddAsync("UsersCacheKey", getAllUsers);
+            if (users.Count == 0)
                 return await Result<List<UserViewModel>>.FailAsync("No users found!");
-            var mappedUser = _mapper.Map<List<UserViewModel>>(user);
+            var mappedUser = _mapper.Map<List<UserViewModel>>(users);
             return await Result<List<UserViewModel>>.SuccessAsync(mappedUser);
         }
         catch (Exception ex)

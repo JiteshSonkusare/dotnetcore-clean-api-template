@@ -1,31 +1,31 @@
-﻿using NLog;
-using MediatR;
+﻿using MediatR;
 using AutoMapper;
 using Domain.Enums;
 using Shared.Wrapper;
 using Domain.Entities;
+using Domain.ViewModels;
 using Application.Interfaces.Repositories;
+using Application.Common.Exceptions;
 
 namespace Application.Features.Users.Commands.UpsertUser;
 
 public class UpsertUserCommand : IRequest<Result<Guid>>
 {
-    public Guid? Id           { get; set; }
-    public string? FirstName  { get; set; }
-    public string? LastName   { get; set; }
-    public string? UserId     { get; set; }
-    public int? Mobile        { get; set; }
-    public int? Phone         { get; set; }
-    public string? Address    { get; set; }
-    public string? Gender     { get; set; }
+    public Guid? Id { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? UserId { get; set; }
+    public int? Mobile { get; set; }
+    public int? Phone { get; set; }
+    public string? Address { get; set; }
+    public string? Gender { get; set; }
     public UserStatus? Status { get; set; }
 }
 
 public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Result<Guid>>
 {
-    private readonly IMapper _mapper;
     private readonly IUnitOfWork<Guid> _unitOfWork;
-    private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+    private readonly IMapper _mapper;
 
     public UpsertUserCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
     {
@@ -41,7 +41,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
             {
                 var entity = _mapper.Map<User>(request);
                 await _unitOfWork.Repository<User>().AddAsync(entity);
-                await _unitOfWork.CommitAsync(cancellationToken);
+                await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
                 return await Result<Guid>.SuccessAsync(entity.Id, "User Created Successfully!");
             }
             else
@@ -58,7 +58,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
                     entity.Status = request.Status ?? entity.Status;
 
                     await _unitOfWork.Repository<User>().UpdateAsync(entity);
-                    await _unitOfWork.CommitAsync(cancellationToken);
+                    await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
                     return await Result<Guid>.SuccessAsync(entity.Id, "User Updated Successfully!");
                 }
                 else
@@ -69,8 +69,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
         }
         catch (Exception ex)
         {
-            logger.Error(ex.Message);
-            throw;
+            throw new GeneralApplicationException(new FailureResponse { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
         }
     }
 }

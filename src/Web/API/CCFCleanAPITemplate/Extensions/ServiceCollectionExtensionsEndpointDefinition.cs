@@ -27,10 +27,7 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
     {
         builder.Host.UseNLog();
         builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
-        builder.Services.RegisterInfrastructureDependencies()
-                        .RegisterApplicationDependencies()
-                        .RegisterSharedDependencies()
-                        .AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")))
+        builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")))
                         .AddCors(options =>
                         {
                             options.AddDefaultPolicy(policy =>
@@ -39,6 +36,9 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
                                       .AllowAnyMethod()
                                       .AllowAnyHeader();
                             });
-                        });
+                        })
+                        .RegisterInfrastructureDependencies()
+                        .RegisterApplicationDependencies()
+                        .RegisterSharedDependencies();
     }
 }
