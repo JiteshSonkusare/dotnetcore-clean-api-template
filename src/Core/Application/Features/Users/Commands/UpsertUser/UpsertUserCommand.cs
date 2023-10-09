@@ -4,8 +4,8 @@ using Domain.Enums;
 using Shared.Wrapper;
 using Domain.Entities;
 using Domain.ViewModels;
-using Application.Interfaces.Repositories;
 using Application.Common.Exceptions;
+using Application.Interfaces.Repositories;
 
 namespace Application.Features.Users.Commands.UpsertUser;
 

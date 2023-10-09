@@ -23,10 +23,12 @@ public class UpsertUserValidator : AbstractValidator<UpsertUserCommand>
         RuleFor(u => u.UserId)
             .NotEmpty()
             .WithMessage("User should not be null/empty.")
+            .When(u => !u.Id.HasValue)
             .MustAsync(async (userId, cancellation) =>
             {
                 bool exists = await userRepository.UserIdExists(userId);
                 return !exists;
-            }).WithMessage("User Id must be unique.");
+            })
+            .WithMessage("User Id must be unique.");
     }
 }

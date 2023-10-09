@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> UserIdExists(string? userId)
     {
-        return await _repository.Entities.AnyAsync(b => b.UserId == userId);
+        return await _repository.Entities.AnyAsync(b => b.UserId.Equals(userId));
     }
 
     public async Task<Response<Result<List<UserViewModel>>>> GetUsersFromApiCall(CancellationToken cancellation)

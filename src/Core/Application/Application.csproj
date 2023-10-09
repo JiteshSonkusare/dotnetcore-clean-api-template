@@ -12,6 +12,7 @@
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="LazyCache" Version="2.4.0" />
+    <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.4" />
   </ItemGroup>
