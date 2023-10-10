@@ -36,7 +36,8 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             Contact = new OpenApiContact
             {
                 Name = _config?.OpenApiInfoExt?.OpenApiContactExt?.Name,
-                Email = _config?.OpenApiInfoExt?.OpenApiContactExt?.Email
+                Email = _config?.OpenApiInfoExt?.OpenApiContactExt?.Email,
+                Url = new Uri(_config?.OpenApiInfoExt?.OpenApiContactExt?.Url ?? string.Empty, UriKind.Relative)
             }
         };
 

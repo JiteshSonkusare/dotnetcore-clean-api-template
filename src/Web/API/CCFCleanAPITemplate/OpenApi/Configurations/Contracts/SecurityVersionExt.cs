@@ -10,5 +10,5 @@ public record SecurityExt
     /// <summary>
     /// Sends API version document name for which authorization is not required. eg: v1 
     /// </summary>
-    public string? NonSecuredVersion { get; set; }
+    public List<string>? NonSecuredVersions { get; set; }
 }
