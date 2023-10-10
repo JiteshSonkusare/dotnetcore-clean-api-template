@@ -31,7 +31,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
         var text = new StringBuilder(_config.OpenApiInfoExt?.Description);
         var info = new OpenApiInfo()
         {
-            Title = !string.IsNullOrWhiteSpace(_config.OpenApiInfoExt?.Title) ? _config.OpenApiInfoExt?.Title : "SwaggerUI",
+            Title = !string.IsNullOrWhiteSpace(_config.OpenApiInfoExt?.Title) ? _config.OpenApiInfoExt?.Title : "CCFCleanAPITemplate",
             Version = description.ApiVersion.ToString(),
             Contact = new OpenApiContact
             {

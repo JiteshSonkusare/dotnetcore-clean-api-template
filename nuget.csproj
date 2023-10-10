@@ -29,7 +29,7 @@
     <Authors>Jitesh Sonkusare</Authors>
     <Copyright>DNB © 2023</Copyright>
     <Description>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Logging Swagger and API versioning.</Description>
-    <PackageTags>web;webapi;ccf</PackageTags>
+    <PackageTags>web;webapi;dnb</PackageTags>
     <PackageCopyright>DNB © 2023</PackageCopyright>
     <PackageProjectUrl>https://github.com/JiteshSonkusare/dotnetcore-clean-api-template</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

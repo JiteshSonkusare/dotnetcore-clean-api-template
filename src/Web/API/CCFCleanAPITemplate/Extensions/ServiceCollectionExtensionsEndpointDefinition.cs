@@ -32,7 +32,7 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
                         {
                             options.AddDefaultPolicy(policy =>
                             {
-                                policy.AllowAnyOrigin()
+                                policy.WithOrigins()
                                       .AllowAnyMethod()
                                       .AllowAnyHeader();
                             });
