@@ -35,7 +35,7 @@ public class UserRepository : IUserRepository
             var result = await _apiClientWrapper.Send(
                 new RequestParameters
                 {
-                    RequestUri = new Uri($"{_userConfig?.BaseURL}/user/users" ?? string.Empty),
+                    RequestUri = new Uri($"{_userConfig?.BaseURL}/users" ?? string.Empty),
                     Method = HttpMethod.Get,
                     AuthHandler = null,
                     RequestHeaders = Array.Empty<HeaderData>(),
