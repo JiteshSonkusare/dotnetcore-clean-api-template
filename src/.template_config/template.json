@@ -22,7 +22,7 @@
         }
       ],
       "defaultValue":"net6.0",
-      "replaces": "{dnbTargetFramework}"
+      "replaces": "{dotnetTargetFramework}"
     },
     "skipRestore": {
       "type": "parameter",
