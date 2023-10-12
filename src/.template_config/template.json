@@ -8,7 +8,7 @@
   },
   "identity": "DNB.Clean.Dotnet.WebAPI",
   "name": "DNB Clean Web API",
-  "description": "A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Logging, Swagger and API versioning.",
+  "description": "A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.",
   "shortName": "DnbClean.WebApi",
   "sourceName": "CCFCleanAPITemplate",
   "symbols": {
@@ -23,7 +23,7 @@
     {
       "modifiers": [
         {
-          "exclude": [ "src/.vs/**", ".template_config/**" ]
+          "exclude": [ ".vs/**", ".template_config/**" ]
         }
       ]
     }

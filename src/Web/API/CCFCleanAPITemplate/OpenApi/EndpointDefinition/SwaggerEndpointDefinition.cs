@@ -11,8 +11,7 @@ public class SwaggerEndpointDefinition : IEndpointDefinition
 {
     public void DefineEndpoints(AppBuilderDefinition builderDefination)
     {
-        bool isDefaultModelSchemaExpand = !bool.TryParse(builderDefination.App.Configuration["OpenApiConfig:IsDefaultModelSchemaExpand"], out var parsedValue) || parsedValue;
-
+        bool isDefaultModelSchemaExpand = Convert.ToBoolean(builderDefination.App.Configuration["OpenApiConfig:IsDefaultModelSchemaExpand"]);
         builderDefination.App.UseSwagger()
             .UseSwaggerUI(options =>
             {

@@ -3,9 +3,16 @@ using Asp.Versioning.Conventions;
 
 namespace CCFCleanAPITemplate.Versioning;
 
+public enum ApiVersioningReaderEnum
+{
+    UrlSegment,
+    QueryString,
+    Header
+}
+
 public record DefineApiVersion(int MajorVersion, int MinorVersion, bool IsVersionDeprecated = false);
 
-public static class Extensions
+public static class ApiVersioningExtensions
 {
     public static ApiVersionSet ApiVersionSet(this WebApplication app, List<DefineApiVersion> apiVersions)
     {

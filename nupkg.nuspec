@@ -5,7 +5,7 @@
         <version>1.0.0</version>
         <title>DNB Clean Web API</title>
         <license type="file">LICENSE</license>
-        <description>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Logging Swagger and API versioning.</description>
+        <description>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging Swagger and API versioning.</description>
             <projectUrl>https://github.com/JiteshSonkusare/dotnetcore-clean-api-template</projectUrl>
         <authors>Jitesh Sonkusare</authors>
         <owners>Jitesh Sonkusare</owners>
@@ -14,7 +14,7 @@
         <tags>WEB;WebAPI;DNB</tags>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>DNB © 2023</copyright>
-        <summary>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Logging Swagger and API versioning.</summary>
+        <summary>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</summary>
         <releaseNotes>Template for creating ASP.NET Core Minimal API.</releaseNotes>
         <repository type="git" url="https://github.com/JiteshSonkusare/dotnetcore-clean-api-template"/>
         <packageTypes>

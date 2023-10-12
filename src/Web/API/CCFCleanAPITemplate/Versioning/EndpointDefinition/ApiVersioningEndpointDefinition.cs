@@ -13,7 +13,7 @@ public class ApiVersioningEndpointDefinition : IEndpointDefinition
 
     public void DefineServices(WebApplicationBuilder builder)
     {
-        ApiVersionReaderEnum apiVersionReaderEnum = ApiVersionReaderEnum.UrlSegment;
+        ApiVersioningReaderEnum apiVersionReaderEnum = ApiVersioningReaderEnum.UrlSegment;
 
         builder.Services.AddApiVersioning(options =>
         {
@@ -22,15 +22,15 @@ public class ApiVersioningEndpointDefinition : IEndpointDefinition
             options.ReportApiVersions = true;
             options.ApiVersionReader = apiVersionReaderEnum switch
             {
-                ApiVersionReaderEnum.UrlSegment => new UrlSegmentApiVersionReader(),
-                ApiVersionReaderEnum.QueryString => new QueryStringApiVersionReader("version"),
-                ApiVersionReaderEnum.Header => new HeaderApiVersionReader("x-api-version"),
+                ApiVersioningReaderEnum.UrlSegment => new UrlSegmentApiVersionReader(),
+                ApiVersioningReaderEnum.QueryString => new QueryStringApiVersionReader("version"),
+                ApiVersioningReaderEnum.Header => new HeaderApiVersionReader("x-api-version"),
                 _ => new UrlSegmentApiVersionReader(),
             };
         }).AddApiExplorer(options =>
         {
             options.GroupNameFormat = "'v'VVV";
-            if (apiVersionReaderEnum == ApiVersionReaderEnum.UrlSegment)
+            if (apiVersionReaderEnum == ApiVersioningReaderEnum.UrlSegment)
                 options.SubstituteApiVersionInUrl = true;
         });
     }
