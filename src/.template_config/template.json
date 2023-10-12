@@ -12,6 +12,18 @@
   "shortName": "DnbClean.WebApi",
   "sourceName": "CCFCleanAPITemplate",
   "symbols": {
+    "Framework":{
+      "type": "parameter",
+      "datatype":"choice",
+      "description": "The target project framework.",
+      "choices": [
+        {
+          "choice": "net6.0"
+        }
+      ],
+      "defaultValue":"net6.0",
+      "replaces": "{dnbTargetFramework}"
+    },
     "skipRestore": {
       "type": "parameter",
       "datatype": "bool",
