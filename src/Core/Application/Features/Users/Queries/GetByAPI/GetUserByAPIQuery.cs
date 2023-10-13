@@ -27,7 +27,7 @@ internal class GetUserByAPIQueryHandler : IRequestHandler<GetUserByAPIQuery, Res
         try
         {
             var response = await _userRepository.GetUsersFromApiCall(cancellationToken);
-            if (response.Data?.Data.Count == 0)
+            if (response.Data?.Data == null)
                 return await Result<List<UserViewModel>>.FailAsync("No users found!");
             var mappedUser = _mapper.Map<List<UserViewModel>>(response.Data?.Data);
             return await Result<List<UserViewModel>>.SuccessAsync(mappedUser, "succeeded.");
