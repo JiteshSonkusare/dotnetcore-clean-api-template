@@ -28,28 +28,17 @@ public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
                 => HttpStatusCode.InternalServerError,
         };
 
-        var failureResponse = GetFailureResponse(code, exception.Message);
-        return (code, JsonSerializer.Serialize(failureResponse));
-    }
-
-    private static FailureResponse GetFailureResponse(HttpStatusCode code, string exception)
-    {
-        if (string.IsNullOrWhiteSpace(exception))
+        if (exception == null)
             return default!;
-
-        var exceptionData = exception
-                .Split('|')
-                .Select(segment => segment.Split(':'))
-                .ToDictionary(parts => parts[0], parts => parts[1]);
 
         var failureResponse = new FailureResponse
         {
-            Status = (int)code,
-            Source = exceptionData.TryGetValue("source", out string? source) ? source : string.Empty,
-            Error = exceptionData.TryGetValue("error", out string? error) ? error : string.Empty,
-            ErrorDescription = exceptionData.TryGetValue("error_description", out string? errorDescription) ? errorDescription : string.Empty,
+            Status           = (int)code,
+            Source           = exception.Source ?? string.Empty,
+            Error            = exception.Message ?? string.Empty,
+            ErrorDescription = exception.InnerException?.Message ?? string.Empty,
         };
 
-        return failureResponse;
+        return (code, JsonSerializer.Serialize(failureResponse));
     }
 }

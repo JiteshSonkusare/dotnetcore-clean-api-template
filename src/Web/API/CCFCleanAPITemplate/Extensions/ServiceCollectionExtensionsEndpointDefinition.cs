@@ -5,7 +5,6 @@ using Shared.ApiClientHanlder;
 using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using CCFCleanAPITemplate.Middlewares;
-using CCFCleanAPITemplate.Authentication;
 using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
 
@@ -41,8 +40,5 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
                         .RegisterInfrastructureDependencies()
                         .RegisterApplicationDependencies()
                         .RegisterSharedDependencies();
-
-        if (Convert.ToBoolean(builder.Configuration["AzureAd:EnableAzureAd"]))
-            builder.Services.RegisterAzureADDependencies(builder.Configuration);
     }
 }
