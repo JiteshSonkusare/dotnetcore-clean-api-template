@@ -1,4 +1,5 @@
-﻿using Asp.Versioning.Builder;
+﻿using Asp.Versioning;
+using Asp.Versioning.Builder;
 using Asp.Versioning.Conventions;
 
 namespace CCFCleanAPITemplate.Versioning;
@@ -32,5 +33,18 @@ public static class ApiVersioningExtensions
         }
 
         return builder;
+    }
+
+    public static ApiVersioningOptions AddSunsetPolicy(this ApiVersioningOptions options)
+    {
+        options.Policies
+            .Sunset(1.0)
+            .Effective(2022, 4, 1)
+            .Link("https://localhost:5000/swagger/index.html")
+            .Title("Versioning Policy")
+            .Type("text/html")
+            .Language("en");
+        
+        return options;
     }
 }

@@ -3,6 +3,7 @@ using LazyCache;
 using AutoMapper;
 using Shared.Wrapper;
 using Domain.Entities;
+using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.ViewModels;
 
@@ -31,7 +32,7 @@ internal class GetUserQueryHandler : IRequestHandler<GetAllUserQuery, Result<Lis
         try
         {
             Task<List<User>> getAllUsers() => _unitOfWork.Repository<User>().GetAllAsync();
-            var users = await _cache.GetOrAddAsync("UsersCacheKey", getAllUsers);
+            var users = await _cache.GetOrAddAsync(CacheConstants.UsersCacheKey, getAllUsers);
             if (users.Count == 0)
                 return await Result<List<UserViewModel>>.FailAsync("No users found!");
             var mappedUser = _mapper.Map<List<UserViewModel>>(users);

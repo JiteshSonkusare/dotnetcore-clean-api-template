@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Shared.Wrapper;
 using Domain.Entities;
+using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
 
 namespace Application.Features.Users.Commands.DeleteUser;
@@ -25,7 +26,7 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
         if (user != null)
         {
             await _unitOfWork.Repository<User>().DeleteAsync(user);
-            await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
+            await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UsersCacheKey);
             return await Result<Guid>.SuccessAsync(user.Id, "User Deleted");
         }
         else

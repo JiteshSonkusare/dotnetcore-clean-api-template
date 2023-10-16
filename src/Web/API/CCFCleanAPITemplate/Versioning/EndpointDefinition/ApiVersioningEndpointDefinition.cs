@@ -17,6 +17,7 @@ public class ApiVersioningEndpointDefinition : IEndpointDefinition
 
         builder.Services.AddApiVersioning(options =>
         {
+            /* Set sunset policy to the api veriosn here: options.AddSunsetPolicy();*/
             options.DefaultApiVersion = new ApiVersion(1, 0);
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.ReportApiVersions = true;

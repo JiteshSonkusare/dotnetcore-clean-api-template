@@ -5,6 +5,7 @@ using Shared.Wrapper;
 using Domain.Entities;
 using Domain.ViewModels;
 using Application.Common.Exceptions;
+using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
 
 namespace Application.Features.Users.Commands.UpsertUser;
@@ -41,7 +42,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
             {
                 var entity = _mapper.Map<User>(request);
                 await _unitOfWork.Repository<User>().AddAsync(entity);
-                await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
+                await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UsersCacheKey);
                 return await Result<Guid>.SuccessAsync(entity.Id, "User Created Successfully!");
             }
             else
@@ -58,7 +59,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
                     entity.Status = request.Status ?? entity.Status;
 
                     await _unitOfWork.Repository<User>().UpdateAsync(entity);
-                    await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, "UsersCacheKey");
+                    await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UsersCacheKey);
                     return await Result<Guid>.SuccessAsync(entity.Id, "User Updated Successfully!");
                 }
                 else
