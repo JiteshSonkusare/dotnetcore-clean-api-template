@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
 namespace Shared.ApiClientHanlder;
@@ -24,7 +25,8 @@ public class Response<T>
 
         if (response.StatusCode >= StatusCodes.Status200OK && response.StatusCode < StatusCodes.Status300MultipleChoices || (otherSuccessStatuses?.Contains(response.StatusCode) ?? false))
         {
-            Data = response.ConvertContent<T>();
+			var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true, ReferenceHandler = ReferenceHandler.Preserve };
+			Data = response.ConvertContent<T>(options);
         }
         else
         {
