@@ -48,7 +48,7 @@ public class UserRepository : IUserRepository
         }
         catch (Exception ex)
         {
-            throw new Exception(new FailureResponse { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
+            throw new Exception(new ApplicationFailureModel { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
         }
     }
 }

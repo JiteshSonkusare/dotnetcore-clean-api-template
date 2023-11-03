@@ -2,7 +2,7 @@
 
 namespace Domain.ViewModels;
 
-public record FailureResponse
+public record ApplicationFailureModel
 {
     /// <summary>
     /// HttpStatus

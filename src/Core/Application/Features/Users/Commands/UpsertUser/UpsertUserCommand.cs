@@ -70,7 +70,7 @@ public class UpsertUserCommandHandler : IRequestHandler<UpsertUserCommand, Resul
         }
         catch (Exception ex)
         {
-            throw new GeneralApplicationException(new FailureResponse { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
+            throw new GeneralApplicationException(new ApplicationFailureModel { Source = ex.Source, Error = ex.Message, ErrorDescription = ex.InnerException?.Message }.ToString());
         }
     }
 }

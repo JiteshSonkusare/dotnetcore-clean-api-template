@@ -17,7 +17,7 @@ public static class AuthExceptionHandlerExtension
                 {
                     httpContext.Response.ContentType = MediaTypeNames.Application.Json;
                     await httpContext.Response.WriteAsync(JsonSerializer.Serialize(
-                    new FailureResponse()
+                    new ApplicationFailureModel()
                     {
                         Status = httpContext.Response.StatusCode,
                         Source = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}{httpContext.Request.Path}",
