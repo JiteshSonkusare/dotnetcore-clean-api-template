@@ -14,8 +14,8 @@ public static class UserEndpointAttributeSummaries
                    responseAttributes: new List<SwaggerResponseAttributeExt>()
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
-                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureModel)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureModel))
+                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureResponse)),
+                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureResponse))
                    });
     }
 
@@ -28,9 +28,9 @@ public static class UserEndpointAttributeSummaries
                    responseAttributes: new List<SwaggerResponseAttributeExt>()
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
-                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureModel)),
+                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureResponse)),
                        new SwaggerResponseAttributeExt(400, "Validation Failure", typeof(ApiFailureResponse)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureModel))
+                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureResponse))
                    });
     }
     
@@ -43,9 +43,9 @@ public static class UserEndpointAttributeSummaries
                    responseAttributes: new List<SwaggerResponseAttributeExt>()
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
-                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureModel)),
+                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureResponse)),
                        new SwaggerResponseAttributeExt(400, "Validation Failure", typeof(ApiFailureResponse)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureModel))
+                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureResponse))
                    });
     }
 
@@ -58,9 +58,9 @@ public static class UserEndpointAttributeSummaries
                    responseAttributes: new List<SwaggerResponseAttributeExt>()
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
-                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureModel)),
+                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureResponse)),
                        new SwaggerResponseAttributeExt(400, "Validation Failure", typeof(ApiFailureResponse)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureModel))
+                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureResponse))
                    });
     }
 
@@ -73,9 +73,9 @@ public static class UserEndpointAttributeSummaries
                    responseAttributes: new List<SwaggerResponseAttributeExt>()
                    {
                        new SwaggerResponseAttributeExt(200, null, typeof(T)),
-                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureModel)),
-                       new SwaggerResponseAttributeExt(500, null, typeof(ApplicationFailureModel)),
-                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureModel))
+                       new SwaggerResponseAttributeExt(400, null, typeof(ApplicationFailureResponse)),
+                       new SwaggerResponseAttributeExt(500, null, typeof(ApplicationFailureResponse)),
+                       new SwaggerResponseAttributeExt(404, null, typeof(ApplicationFailureResponse))
                    });
     }
 }
