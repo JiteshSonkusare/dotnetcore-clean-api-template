@@ -1,7 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using CCFCleanAPITemplate.OpenApi.Configurations.Contracts;
-using System.Linq;
 
 namespace CCFCleanAPITemplate.OpenApi;
 
