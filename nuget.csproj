@@ -26,14 +26,14 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <Version>1.0.0</Version>
-    <PackageId>DNB.Clean.Dotnet.WebAPI</PackageId>
-    <Title>DNB Clean Web API</Title>
-    <Company>DNB</Company>
+    <PackageId>CCF.Clean.Dotnet.WebAPI</PackageId>
+    <Title>CCF Clean Web API</Title>
+    <Company>CCF</Company>
     <Authors>Jitesh Sonkusare</Authors>
-    <Copyright>DNB © 2023</Copyright>
+    <Copyright>CCF © 2023</Copyright>
     <Description>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</Description>
-    <PackageTags>web;webapi;dnb</PackageTags>
-    <PackageCopyright>DNB © 2023</PackageCopyright>
+    <PackageTags>web;webapi;ccf</PackageTags>
+    <PackageCopyright>ccf © 2023</PackageCopyright>
     <PackageProjectUrl>https://github.com/JiteshSonkusare/dotnetcore-clean-api-template</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>

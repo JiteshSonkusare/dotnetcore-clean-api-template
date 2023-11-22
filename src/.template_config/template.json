@@ -1,16 +1,16 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Jitesh Sonkusare",
-  "classifications": [ "Web","WebAPI", "DNB" ],
+  "classifications": [ "Web","WebAPI", "CCF" ],
   "tags": {
     "language": "C#",
     "type": "solution"
   },
-  "identity": "DNB.Clean.Dotnet.WebAPI",
-  "name": "DNB Clean Web API",
+  "identity": "CCF.Clean.Dotnet.WebAPI",
+  "name": "CCF Clean Web API",
   "description": "A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.",
-  "shortName": "DnbClean.WebApi",
-  "sourceName": "CCFCleanAPITemplate",
+  "shortName": "CCFClean.WebApi",
+  "sourceName": "CCFCleanApiTemplate",
   "symbols": {
     "Framework":{
       "type": "parameter",
