@@ -3,7 +3,7 @@ using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace CCFCleanAPITemplate.Authentication.AzureAd;
+namespace CCFCleanAPITemplate.Authentication.EndpointDefinition;
 
 public class AzureAdEndpointDefinition : IEndpointDefinition
 {

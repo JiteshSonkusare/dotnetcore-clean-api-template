@@ -1,6 +1,6 @@
 using CCFCleanAPITemplate.Versioning;
-using CCFCleanAPITemplate.Endpoints.V1;
 using CCFCleanAPITemplate.EndpointDefinition;
+using CCFCleanAPITemplate.ApiEndpoints.V1;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddEndpointDefinitions(typeof(UserEndpointDefinition));
