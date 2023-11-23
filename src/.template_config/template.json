@@ -6,11 +6,11 @@
     "language": "C#",
     "type": "solution"
   },
-  "identity": "CCF.Clean.Dotnet.Template",
+  "identity": "CCF.Clean.Dotnet.WebAPI",
   "name": "CCF Clean Web API",
   "description": "A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.",
   "shortName": "CCFClean.WebApi",
-  "sourceName": "CCFCleanApiTemplate",
+  "sourceName": "CCFCleanAPITemplate",
   "symbols": {
     "Framework":{
       "type": "parameter",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>CCF.Clean.Dotnet.Template</id>
+        <id>CCF.Clean.Dotnet.WebAPI</id>
         <version>1.0.0</version>
         <title>CCF Clean Web API</title>
         <license type="file">LICENSE</license>
