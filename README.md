@@ -12,6 +12,7 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
     - [x] Validation (FluentValidation)
     - [x] Caching
 - [x] Dotnet Core Minimal API
+- [x] Entity Framework Core (Database)
 - [x] Swagger
 - [x] API Versioning
 - [x] Exception Handling
