@@ -37,7 +37,7 @@ Built on .NET 6.0
 
     ```    
     mkdir CCFCleanWeb 
-    CCFCleanWeb
+    cd CCFCleanWeb
     ```
 
 3. Create a new solution
