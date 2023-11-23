@@ -11,7 +11,7 @@
         <owners>Jitesh Sonkusare</owners>
         <icon>./src/.template_config/cleanapi.png</icon>
         <language>en-US</language>
-        <tags>WEB;WebAPI;CCF;dnb</tags>
+        <tags>WEB;WebAPI;CCF;DNB</tags>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>CCF © 2023</copyright>
         <summary>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</summary>
