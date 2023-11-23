@@ -28,19 +28,23 @@ Built on .NET 6.0
 
     1. Install CCF Clean Web API Template
 
-        ## dotnet new install CCF.Clean.Dotnet.WebAPI
-
-    NOTE: The template only needs to be installed once. Running this command again will update your version of the template. Specify the version to get specific version of template.
+        ```
+        dotnet new install CCF.Clean.Dotnet.WebAPI 
+        ```
+        > NOTE: The template only needs to be installed once. Running this command again will update your version of the template. Specify the version to get specific version of template.
 
     2. Create a new directory
 
-        ## mkdir CCFCleanWeb
-           cd CCFCleanWeb
+        ```    
+        mkdir CCFCleanWeb 
+        CCFCleanWeb
+        ```
 
     3. Create a new solution
 
-        ## dotnet new CCFClean.WebApi --name {{SolutionName}} --output .\
-
-    NOTE: Specify {{SolutionName}}, this will be used as the solution name and project namespaces.
+        ```
+        dotnet new CCFClean.WebApi --name {{SolutionName}} --output .\
+        ```
+        > NOTE: Specify {{SolutionName}}, this will be used as the solution name and project namespaces.
 
 
