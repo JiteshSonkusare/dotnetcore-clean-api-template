@@ -1,18 +1,29 @@
-# DotnetCore Clean WebAPI Template
+# DotnetCore Clean WebAPI Nuget Template
 
-A ready-to-use project template for creating dotnet core minimal api which supports
-1. Clean Architecture
-    a. CQRS
-    b. MediatR
-    c. Repositories (Generic Repositories)
-    d. Model Mapping (Automapper)
-    e. Validation (FluentValidation)
-    f. Caching
-2. Dotnet Core Minimal API
-3. Swagger
-4. API Versioning
-5. Exception Handling
-6. Logging (NLog)
-7. Dependency Injection
-8. Generic API Http Client Handler
-9. Authentication Support
+CCF Clean Web API nuget template is ready-to-use project template for creating dotnet core minimal api.
+
+# Getting started
+
+Install CCF Clean Web API template using nuget package and use it to develop dotnet core api with ccf clean web api features.
+
+# Key features
+
+- [x] Clean Architecture
+    - [x] CQRS
+    - [x] MediatR
+    - [x] Repositories (Generic Repositories)
+    - [x] Model Mapping (Automapper)
+    - [x] Validation (FluentValidation)
+    - [x] Caching
+- [x] Dotnet Core Minimal API
+- [x] Swagger
+- [x] API Versioning
+- [x] Exception Handling
+- [x] Logging (NLog)
+- [x] Dependency Injection
+- [x] Generic API Http Client Handler
+- [x] Authentication Support
+
+# Supported Versions
+
+Built on .NET 6.0

@@ -20,5 +20,6 @@
         <packageTypes>
             <packageType name="Template" />
         </packageTypes>
+        <readme>./README.md</readme>
     </metadata>
 </package>
