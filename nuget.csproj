@@ -25,7 +25,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageId>CCF.Clean.Dotnet.WebAPI</PackageId>
     <Title>CCF Clean Web API</Title>
     <Company>CCF</Company>
