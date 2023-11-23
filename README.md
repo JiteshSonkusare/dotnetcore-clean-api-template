@@ -1,4 +1,4 @@
-# CCF DotnetCore WebAPI Template
+# CCF Clean WebAPI DotnetCore Template
 
 CCF Clean Web API nuget template is ready-to-use project template for creating dotnet core minimal api using Clean Architecture, leveraging ccf clean web api features.
 
