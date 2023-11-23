@@ -47,5 +47,3 @@ Built on .NET 6.0
     dotnet new CCFClean.WebApi --name {{SolutionName}} --output .\
     ```
     > NOTE: Specify {{SolutionName}}, this will be used as the solution name and project namespaces.
-
-
