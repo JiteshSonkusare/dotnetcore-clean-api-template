@@ -33,26 +33,9 @@ public abstract class AbstractResponseHandlerMiddleware
 
 			_logger.Info($"Response status code: {httpContext.Response.StatusCode}");
 		}
-		catch (ValidationException exception)
+		catch (ValidationException ex)
 		{
-			var failures = new ApiFailureResponse
-			{
-				Source = "ValidationFailure",
-				Status = StatusCodes.Status400BadRequest.ToString(),
-				Message = exception.Message
-			};
-
-			if (exception.Errors is not null)
-			{
-				failures.Extensions["errors"] = exception.Errors;
-			}
-
-			httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-			_logger.Error(failures.ToJson());
-
-			await httpContext.Response.WriteAsJsonAsync(failures);
-
+			await HandleValidationFailureAsync(httpContext, ex);
 		}
 		catch (Exception ex)
 		{
@@ -68,6 +51,26 @@ public abstract class AbstractResponseHandlerMiddleware
 		var (status, failureResponse) = HandleResponse(exception);
 		response.StatusCode = (int)status;
 		_logger.Error($"StatusCode: {status}, Error: {failureResponse}");
-		await response.WriteAsync(failureResponse.ToString());
+		await response.WriteAsJsonAsync(failureResponse);
+	}
+
+	private static async Task HandleValidationFailureAsync(HttpContext context, ValidationException exception)
+	{
+		var failures = new ApiFailureResponse
+		{
+			Source = "ValidationFailure",
+			Status = StatusCodes.Status400BadRequest.ToString(),
+			Message = exception.Message
+		};
+
+		if (exception.Errors is not null)
+		{
+			failures.Extensions["errors"] = exception.Errors;
+		}
+
+		context.Response.StatusCode = StatusCodes.Status400BadRequest;
+		_logger.Error(failures.ToJson());
+
+		await context.Response.WriteAsJsonAsync(failures);
 	}
 }
