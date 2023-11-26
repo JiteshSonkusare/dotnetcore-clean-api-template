@@ -18,29 +18,31 @@ public class UserEndpointDefinition : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
 	{
+		var mapToApiVersion = new ApiVersion(1);
+
 		builderDefination.App
 			.MapGet("v{version:apiVersion}/users", Users)
 			.GetAllUserEndpointSummary<Wrapper.Result<List<UserViewModel>>>()
 			.WithApiVersionSet(builderDefination.ApiVersionSet)
-			.MapToApiVersion(new ApiVersion(1));
+			.MapToApiVersion(mapToApiVersion);
 
 		builderDefination.App
 			.MapGet("v{version:apiVersion}/users/{id}", GetUserById)
 			.GetUserByIdEndpointSummary<Wrapper.Result<UserViewModel>>()
 			.WithApiVersionSet(builderDefination.ApiVersionSet)
-			.MapToApiVersion(new ApiVersion(1));
+			.MapToApiVersion(mapToApiVersion);
 
 		builderDefination.App
 			.MapPost("v{version:apiVersion}/users/upsert", UpsertUser)
 			.UpsertUserEndpointSummary<Wrapper.Result<Guid>>()
 			.WithApiVersionSet(builderDefination.ApiVersionSet)
-			.MapToApiVersion(new ApiVersion(1));
+			.MapToApiVersion(mapToApiVersion);
 
 		builderDefination.App
 		   .MapDelete("v{version:apiVersion}/users/delete/{id}", DeleteUser)
 		   .DeleteUserEndpointSummary<Wrapper.Result<Guid>>()
 		   .WithApiVersionSet(builderDefination.ApiVersionSet)
-		   .MapToApiVersion(new ApiVersion(1));
+		   .MapToApiVersion(mapToApiVersion);
 	}
 
 	public void DefineServices(WebApplicationBuilder builder)

@@ -14,11 +14,13 @@ public class UserEndpointDefinition : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
 	{
+		var mapToApiVersion = new ApiVersion(2);
+
 		builderDefination.App
 			.MapGet("v{version:apiVersion}/user/users", Users)
 			.GetUserFromApiEndpointSummary<Wrapper.Result<List<UserViewModel>>>()
 			.WithApiVersionSet(builderDefination.ApiVersionSet)
-			.MapToApiVersion(new ApiVersion(2));
+			.MapToApiVersion(mapToApiVersion);
 	}
 
 	public void DefineServices(WebApplicationBuilder builder)
