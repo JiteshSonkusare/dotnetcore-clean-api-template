@@ -15,7 +15,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>CCF © 2023</copyright>
         <summary>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</summary>
-        <releaseNotes>Template for creating ASP.NET Core Minimal API.</releaseNotes>
+        <releaseNotes>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</releaseNotes>
         <repository type="git" url="https://github.com/JiteshSonkusare/dotnetcore-clean-api-template"/>
         <packageTypes>
             <packageType name="Template" />
