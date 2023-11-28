@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{FD946F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{9E6B35C8-68F1-43A9-975C-2EAB0139892F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Core\Application\Application.csproj", "{9BC3F7D6-2AEF-4DB1-B453-B3846F08A066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Core\Application\Application.csproj", "{9BC3F7D6-2AEF-4DB1-B453-B3846F08A066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Core\Domain\Domain.csproj", "{DC830AF1-7169-49E2-9BA8-B97F8237D82B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain\Domain.csproj", "{DC830AF1-7169-49E2-9BA8-B97F8237D82B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure\Infrastructure.csproj", "{0AC5A7B6-AC97-491F-8444-0AE65756425F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure\Infrastructure.csproj", "{0AC5A7B6-AC97-491F-8444-0AE65756425F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{BD8C0BD2-DBCA-4A52-9B06-466570010F9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared\Shared.csproj", "{BD8C0BD2-DBCA-4A52-9B06-466570010F9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{7E32FB7E-47BD-4196-AC4D-E2A65DA622C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCFCleanAPITemplate", "Web\API\CCFCleanAPITemplate\CCFCleanAPITemplate.csproj", "{9C334047-3F87-4CF2-91D9-F541C78BE6BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCFCleanAPITemplate", "Web\API\CCFCleanAPITemplate\CCFCleanAPITemplate.csproj", "{9C334047-3F87-4CF2-91D9-F541C78BE6BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

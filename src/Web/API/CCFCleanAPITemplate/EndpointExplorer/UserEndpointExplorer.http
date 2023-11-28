@@ -1,0 +1,31 @@
+@https_HostAddress = https://localhost:5000
+@ApiVersion = v1
+
+GET {{https_HostAddress}}/{{ApiVersion}}/users
+Accept: application/json
+###
+
+GET {{https_HostAddress}}/{{ApiVersion}}/users/4f6d7682-b744-4afc-33dc-08dbd94c277e
+Accept: application/json
+###
+
+POST {{https_HostAddress}}/{{ApiVersion}}/users/upsert
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id"       : "b595e99a-d8be-4178-436d-08dbef69fb34",
+  "firstName": "Harry",
+  "lastName" : "Potter",
+  "userId"   : "HGWRT41",
+  "mobile"   : 12345678,
+  "phone"    : 2435464,
+  "address"  : "London",
+  "gender"   : "Male",
+  "status"   : "Active"
+}
+###
+
+DELETE {{https_HostAddress}}/{{ApiVersion}}/users/delete/75769384-8e29-48c1-436c-08dbef69fb34
+Accept: application/json
+###
