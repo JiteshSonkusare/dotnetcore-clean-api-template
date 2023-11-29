@@ -39,8 +39,8 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
 2. Create a new directory
 
     ```    
-    mkdir CCFCleanWeb
-    cd CCFCleanWeb
+    mkdir CCFDemoWebApp
+    cd CCFDemoWebApp
     ```
 
 3. Create a new solution
