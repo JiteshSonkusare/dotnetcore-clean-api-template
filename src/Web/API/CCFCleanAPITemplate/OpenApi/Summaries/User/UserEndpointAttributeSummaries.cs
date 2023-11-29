@@ -11,9 +11,8 @@ public static class UserEndpointAttributeSummaries
 				   description: "Use this api endpoint to get all users.",
 				   responseAttributes: new List<SwaggerResponseAttributeExt>()
 				   {
-					   new(StatusCodes.Status200OK        , null, typeof(T)), 
-					   new(StatusCodes.Status400BadRequest, null, typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status404NotFound  , null, typeof(ApplicationFailureResponse))
+					   new(StatusCodes.Status200OK        , null, typeof(T)),
+					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse))
 				   });
 
 	public static RouteHandlerBuilder GetUserByIdEndpointSummary<T>(this RouteHandlerBuilder endpoint) => endpoint.AddMetaData(
@@ -23,8 +22,7 @@ public static class UserEndpointAttributeSummaries
 				   responseAttributes: new List<SwaggerResponseAttributeExt>()
 				   {
 					   new(StatusCodes.Status200OK        , null, typeof(T)),
-					   new(StatusCodes.Status400BadRequest, null, typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status404NotFound  , null, typeof(ApplicationFailureResponse))
+					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse))
 				   });
 
 	public static RouteHandlerBuilder UpsertUserEndpointSummary<T>(this RouteHandlerBuilder endpoint) => endpoint.AddMetaData(
@@ -34,8 +32,7 @@ public static class UserEndpointAttributeSummaries
 				   responseAttributes: new List<SwaggerResponseAttributeExt>()
 				   {
 					   new(StatusCodes.Status200OK, null, typeof(T)),
-					   new(StatusCodes.Status400BadRequest, "Exception", typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status404NotFound, null, typeof(ApplicationFailureResponse))
+					   new(StatusCodes.Status400BadRequest, "Exception", typeof(ApiFailureResponse))
 				   });
 
 	public static RouteHandlerBuilder DeleteUserEndpointSummary<T>(this RouteHandlerBuilder endpoint) => endpoint.AddMetaData(
@@ -45,9 +42,7 @@ public static class UserEndpointAttributeSummaries
 				   responseAttributes: new List<SwaggerResponseAttributeExt>()
 				   {
 					   new(StatusCodes.Status200OK, null, typeof(T)),
-					   new(StatusCodes.Status400BadRequest, null, typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status400BadRequest, "Validation Failure", typeof(ApiFailureResponse)),
-					   new(StatusCodes.Status404NotFound, null, typeof(ApplicationFailureResponse))
+					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse))
 				   });
 
 	public static RouteHandlerBuilder GetUserFromApiEndpointSummary<T>(this RouteHandlerBuilder endpoint) => endpoint.AddMetaData(
@@ -57,8 +52,7 @@ public static class UserEndpointAttributeSummaries
 				   responseAttributes: new List<SwaggerResponseAttributeExt>()
 				   {
 					   new(StatusCodes.Status200OK, null, typeof(T)),
-					   new(StatusCodes.Status400BadRequest, null, typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status500InternalServerError, null, typeof(ApplicationFailureResponse)),
-					   new(StatusCodes.Status404NotFound, null, typeof(ApplicationFailureResponse))
+					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse)),
+					   new(StatusCodes.Status500InternalServerError, null, typeof(ApiFailureResponse))
 				   });
 }
