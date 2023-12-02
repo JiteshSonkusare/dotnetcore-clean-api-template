@@ -55,4 +55,15 @@ public static class UserEndpointAttributeSummaries
 					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse)),
 					   new(StatusCodes.Status500InternalServerError, null, typeof(ApiFailureResponse))
 				   });
+
+	public static RouteHandlerBuilder GetUserbyIdFromApiEndpointSummary<T>(this RouteHandlerBuilder endpoint) => endpoint.AddMetaData(
+				   tag: "User",
+				   summary: "Get user by id from api call.",
+				   description: "Use this api endpoint to get user by id from api call.",
+				   responseAttributes: new List<SwaggerResponseAttributeExt>()
+				   {
+					   new(StatusCodes.Status200OK, null, typeof(T)),
+					   new(StatusCodes.Status400BadRequest, null, typeof(ApiFailureResponse)),
+					   new(StatusCodes.Status500InternalServerError, null, typeof(ApiFailureResponse))
+				   });
 }

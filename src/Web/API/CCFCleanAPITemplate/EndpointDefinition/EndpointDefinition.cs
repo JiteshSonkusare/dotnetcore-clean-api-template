@@ -1,6 +1,7 @@
 ﻿using CCFCleanAPITemplate.Versioning;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
 using CCFCleanAPITemplate.OpenApi.EndpointDefinition;
+using CCFCleanAPITemplate.EndpointDefinition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.EndpointDefinition;
 
@@ -17,7 +18,7 @@ public static class EndpointDefinition
 					.Where(x => typeof(IEndpointDefinition).IsAssignableFrom(x)
 					   && !x.IsInterface
 					   && !x.IsAbstract
-					   && !x.IsDefined(typeof(DeprecateEndpointDefinitionAttribute), false))
+					   && !x.IsDefined(typeof(EndpointDefinitionDeprecateAttribute), false))
 					.Select(Activator.CreateInstance)
 					.Cast<IEndpointDefinition>());
 		}

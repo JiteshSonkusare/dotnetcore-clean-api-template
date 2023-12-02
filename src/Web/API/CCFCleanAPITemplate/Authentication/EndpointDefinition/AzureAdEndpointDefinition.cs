@@ -2,10 +2,11 @@
 using CCFCleanAPITemplate.EndpointDefinition;
 using CCFCleanAPITemplate.EndpointDefinition.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CCFCleanAPITemplate.EndpointDefinition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.Authentication.EndpointDefinition;
 
-[DeprecateEndpointDefinition("Azure AD is not in use")]
+[EndpointDefinitionDeprecate("Azure AD is not in use")]
 public class AzureAdEndpointDefinition : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
