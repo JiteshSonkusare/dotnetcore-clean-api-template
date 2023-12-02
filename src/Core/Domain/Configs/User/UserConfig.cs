@@ -1,6 +1,6 @@
 ﻿namespace Domain.Configs.User;
 
-public class UserConfig
+public record UserConfig
 {
     public string? BaseURL { get; set; }
 }

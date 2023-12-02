@@ -23,7 +23,7 @@ public class SwaggerDocumentFilter : IDocumentFilter
 			if (isBasePathListFilter == null || Convert.ToBoolean(isBasePathListFilter))
 				swaggerDoc.Servers = GetBasePathListFilterURLs();
 			else
-				swaggerDoc.Servers = GetCustomeBasePathFilterURLs(_openApiConfig?.ServerPathFilters?.CustomeBasePathFilter?.URL ?? string.Empty, _openApiConfig?.ServerPathFilters?.CustomeBasePathFilter?.EnvironmentNames ?? new Enumerable.<string>());
+				swaggerDoc.Servers = GetCustomeBasePathFilterURLs(_openApiConfig?.ServerPathFilters?.CustomeBasePathFilter?.URL ?? string.Empty, _openApiConfig?.ServerPathFilters?.CustomeBasePathFilter?.EnvironmentNames ?? new List<string>());
 		}
 		if (_openApiConfig?.SecurityExt != null)
 		{
@@ -34,7 +34,7 @@ public class SwaggerDocumentFilter : IDocumentFilter
 		}
 	}
 
-	private List<OpenApiServer>? GetBasePathListFilterURLs()
+	private IList<OpenApiServer>? GetBasePathListFilterURLs()
 	{
 		var devBasePathFilters = _openApiConfig.ServerPathFilters?.BasePathListFilter;
 		if (devBasePathFilters == null)
@@ -51,7 +51,7 @@ public class SwaggerDocumentFilter : IDocumentFilter
 		return openApiServers;
 	}
 
-	public static List<OpenApiServer> GetCustomeBasePathFilterURLs(string url, List<string> envNames)
+	public static IList<OpenApiServer> GetCustomeBasePathFilterURLs(string url, IList<string> envNames)
 	{
 		var serverVariables = new Dictionary<string, OpenApiServerVariable>
 		{
@@ -59,7 +59,7 @@ public class SwaggerDocumentFilter : IDocumentFilter
 			{
 				Default = envNames.FirstOrDefault(),
 				Description = "Environment identifier.",
-				Enum = envNames
+				Enum = envNames.ToList()
 			}
 		};
 		var server = new OpenApiServer
