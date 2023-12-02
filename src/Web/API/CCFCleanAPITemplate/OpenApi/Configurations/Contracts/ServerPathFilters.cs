@@ -10,7 +10,7 @@ public record ServerPathFilters
     /// <summary>
     /// If IsBasePathListFilter is set to true, it is mandatory to send the environment name and URL as a list.
     /// </summary>
-    public List<BasePathListFilter>? BasePathListFilter { get; set; }
+    public IEnumerable<BasePathListFilter>? BasePathListFilter { get; set; }
 
     /// <summary>
     /// If IsBasePathListFilter is set to false, then you can use this customize server path filter.
@@ -36,7 +36,7 @@ public record CustomeBasePathFilter
     /// <summary>
     /// If IsBasePathListFilter is set to false, it is mandatory too send the environment names: {stest, atest, prod}
     /// </summary>
-    public List<string>? EnvironmentNames { get; set; }
+    public IEnumerable<string>? EnvironmentNames { get; set; }
 
     /// <summary>
     /// If IsBasePathListFilter is set to false, sends the URL, which must contain the {Environment} placeholder, eg: {https://{Environment}.contoso.com}

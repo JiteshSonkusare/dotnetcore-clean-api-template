@@ -12,7 +12,7 @@ namespace CCFCleanAPITemplate.ApiEndpoints.V2;
 
 public class UserEndpointDefinition : IEndpointDefinition
 {
-	public void DefineEndpoints(AppBuilderDefinition builderDefination)
+    public void DefineEndpoints(AppBuilderDefinition builderDefination)
 	{
 		var mapToApiVersion = new ApiVersion(2);
 
@@ -25,10 +25,7 @@ public class UserEndpointDefinition : IEndpointDefinition
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
-		builder.Services.AddSingleton(new UserConfig
-		{
-			BaseURL = builder.Configuration["UserConfig:BaseURL"]
-		});
+		builder.Services.Configure<UserConfig>(builder.Configuration.GetSection(nameof(UserConfig)));
 	}
 
 	private async Task<IResult> Users(IMediator mediator)

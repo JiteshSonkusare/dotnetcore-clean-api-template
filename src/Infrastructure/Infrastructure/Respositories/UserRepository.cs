@@ -4,6 +4,7 @@ using Domain.Entities;
 using Domain.ViewModels;
 using Domain.Configs.User;
 using Shared.ApiClientHanlder;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.ViewModels;
@@ -16,11 +17,11 @@ public class UserRepository : IUserRepository
     private readonly IApiClientWrapper _apiClientWrapper;
     private readonly UserConfig _userConfig;
     
-    public UserRepository(IRepositoryAsync<User, Guid> repository, IApiClientWrapper apiClientWrapper, UserConfig userConfig)
+    public UserRepository(IRepositoryAsync<User, Guid> repository, IApiClientWrapper apiClientWrapper, IOptions<UserConfig> userConfig)
     {
         _repository = repository;
         _apiClientWrapper = apiClientWrapper;
-        _userConfig = userConfig;
+        _userConfig = userConfig.Value;
     }
 
     public async Task<bool> UserIdExists(string? userId)

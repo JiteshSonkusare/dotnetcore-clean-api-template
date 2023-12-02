@@ -15,7 +15,7 @@ public record DefineApiVersion(int MajorVersion, int MinorVersion, bool IsVersio
 
 public static class ApiVersioningExtensions
 {
-    public static ApiVersionSet ApiVersionSet(this WebApplication app, List<DefineApiVersion> apiVersions)
+    public static ApiVersionSet ApiVersionSet(this WebApplication app, IEnumerable<DefineApiVersion> apiVersions)
     {
         return app.NewApiVersionSet()
                   .WithApiVersions(apiVersions)
@@ -23,16 +23,16 @@ public static class ApiVersioningExtensions
                   .Build();
     }
 
-    public static ApiVersionSetBuilder WithApiVersions(this ApiVersionSetBuilder builder, List<DefineApiVersion> apiVersions)
+    public static ApiVersionSetBuilder WithApiVersions(this ApiVersionSetBuilder builder, IEnumerable<DefineApiVersion> apiVersions)
     {
-        foreach (var version in apiVersions)
+		foreach (var version in apiVersions)
         {
             builder.HasApiVersion(version.MajorVersion, version.MinorVersion);
             if (version.IsVersionDeprecated)
                 builder.HasDeprecatedApiVersion(version.MajorVersion);
         }
 
-        return builder;
+		return builder;
     }
 
     public static ApiVersioningOptions AddSunsetPolicy(this ApiVersioningOptions options)

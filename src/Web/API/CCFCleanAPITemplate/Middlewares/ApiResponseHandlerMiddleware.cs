@@ -35,12 +35,12 @@ public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
 		{
 			Source = exception.Source,
 			Status = code.ToString(),
-			Message = exception.InnerException?.Message ?? string.Empty,
+			Message = exception.Message ?? string.Empty,
 		};
 
 		if (exception.InnerException is not null)
 		{
-			failures.Extensions["errors"] = exception.Message ?? string.Empty;
+			failures.Extensions["errors"] = exception.InnerException.Message ?? string.Empty;
 		}
 
 		return (code, JsonSerializer.Serialize(failures));

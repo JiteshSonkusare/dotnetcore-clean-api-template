@@ -9,43 +9,38 @@ namespace CCFCleanAPITemplate.OpenApi.EndpointDefinition;
 
 public class SwaggerEndpointDefinition : IEndpointDefinition
 {
-    public void DefineEndpoints(AppBuilderDefinition builderDefination)
-    {
-        bool isDefaultModelSchemaExpand = Convert.ToBoolean(builderDefination.App.Configuration["OpenApiConfig:IsDefaultModelSchemaExpand"]);
-        builderDefination.App.UseSwagger()
-            .UseSwaggerUI(options =>
-            {
-                options.DocumentTitle = "SwaggerUI";
-                if (!isDefaultModelSchemaExpand)
-                    options.DefaultModelsExpandDepth(-1);
-                var descriptions = builderDefination.App.DescribeApiVersions();
-                foreach (var description in descriptions.Reverse())
-                {
-                    var url = $"{description.GroupName}/swagger.json";
-                    var name = description.GroupName.ToUpperInvariant();
-                    options.SwaggerEndpoint(url, name);
-                }
-            });
-    }
+	public void DefineEndpoints(AppBuilderDefinition builderDefination)
+	{
+		builderDefination.App.UseSwagger()
+			.UseSwaggerUI(options =>
+			{
+				options.DocumentTitle = "SwaggerUI";
+				//options.DefaultModelsExpandDepth(-1);
+				var descriptions = builderDefination.App.DescribeApiVersions().OrderByDescending(v => v.ApiVersion);
+				foreach (var description in descriptions)
+				{
+					var url = $"{description.GroupName}/swagger.json";
+					var name = description.GroupName.ToUpperInvariant();
+					options.SwaggerEndpoint(url, name);
+				}
+			});
+	}
 
-    public void DefineServices(WebApplicationBuilder builder)
-    {
-        var openApiConfig = builder.Configuration.GetSection("OpenApiConfig").Get<OpenApiConfig>() ?? new OpenApiConfig();
-        builder.Services
-            .AddSingleton(openApiConfig)
-            .Configure<JsonOptions>(options =>
-            {
-                Shared.Extension.Extensions.SetGlobalJsonSerializerSettings(options.SerializerOptions);
-            })
-            .AddEndpointsApiExplorer()
-            .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
-            .AddSwaggerGen(options =>
-            {
-                options.EnableAnnotations();
-                options.OperationFilter<SwaggerDefaultValues>();
-                if (openApiConfig.SecurityExt != null && openApiConfig.SecurityExt.IsSecured)
-                    options.AddSwaggerSecurityDefination();
-                options.DocumentFilter<SwaggerDocumentFilter>();
-            });
-    }
+	public void DefineServices(WebApplicationBuilder builder)
+	{
+		builder.Services
+			.Configure<OpenApiConfig>(builder.Configuration.GetSection(nameof(OpenApiConfig)))
+			.Configure<JsonOptions>(options =>
+			{
+				Shared.Extension.Extensions.SetGlobalJsonSerializerSettings(options.SerializerOptions);
+			})
+			.AddEndpointsApiExplorer()
+			.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+			.AddSwaggerGen(options =>
+			{
+				options.EnableAnnotations();
+				options.OperationFilter<SwaggerDefaultValues>();
+				options.DocumentFilter<SwaggerDocumentFilter>();
+			});
+	}
 }

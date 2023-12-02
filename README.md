@@ -10,7 +10,7 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
     - [x] Repositories (Generic Repositories)
     - [x] Model Mapping (Automapper)
     - [x] Validation (FluentValidation)
-    - [x] Caching
+    - [x] Memory Caching
 - [x] Dotnet Core Minimal API
 - [x] Entity Framework Core (Database)
 - [x] Swagger
@@ -20,6 +20,7 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
 - [x] Dependency Injection
 - [x] Generic API Http Client Handler
 - [x] Authentication Support
+- [x] Option Pattern
 
 # Supported Versions
 
