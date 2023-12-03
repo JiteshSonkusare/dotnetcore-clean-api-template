@@ -12,10 +12,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-    - name: Clean up Existing .nuspec Files
-      run: rm -f *.nuspec
-    - name: Pack NuGet Package
-      run: nuget pack ./nupkg.nuspec -OutputDirectory . -Properties Configuration=Release -NoDefaultExcludes  
+      uses: actions/setup-dotnet@v3 
     - name: Show files in project root folder
       run: ls ./
