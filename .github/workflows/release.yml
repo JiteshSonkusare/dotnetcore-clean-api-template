@@ -14,10 +14,6 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
     - name: Clean up Existing .nuspec Files
-      run: rm -f *.nuspec  
-    - name: Build
-      run: dotnet build -c Release  
-    - name: Pack NuGet Package
-      run: nuget pack ./nupkg.nuspec -OutputDirectory . -Properties Configuration=Release -NoDefaultExcludes
-    - name: Push to NuGet
-      run: nuget push *.nupkg --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
+      run: rm -f *.nuspec
+    - name: Show files in project root folder
+      run: ls ./
