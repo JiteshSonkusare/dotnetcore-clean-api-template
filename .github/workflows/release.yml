@@ -17,5 +17,7 @@ jobs:
       run: dotnet build -c Release  
     - name: Clean up Existing .nuspec Files
       run: rm -f *.nuspec
+    - name: Pack NuGet Package
+      run: nuget pack ./nupkg.nuspec -OutputDirectory . -Properties Configuration=Release -NoDefaultExcludes  
     - name: Show files in project root folder
       run: ls ./
