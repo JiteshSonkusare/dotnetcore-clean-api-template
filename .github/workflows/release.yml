@@ -10,8 +10,8 @@ jobs:
     timeout-minutes: 5
     steps:
     - name: Checkout
-      uses: actions/checkout@v2.4.3
+      uses: actions/checkout@v2
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v1
     - name: Pack NuGet Package
       run: nuget pack ./nupkg.nuspec -Properties Configuration=Release -NoDefaultExcludes
