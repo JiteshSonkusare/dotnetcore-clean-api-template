@@ -16,4 +16,6 @@ jobs:
     - name: Build
       run: dotnet build -c Release  
     - name: Pack NuGet Package
-      run: dotnet pack -c Release --no-build --output .
+      run: nuget pack ./nupkg.nuspec -OutputDirectory . -Properties Configuration=Release -NoDefaultExcludes
+    - name: Push to NuGet
+      run: nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
