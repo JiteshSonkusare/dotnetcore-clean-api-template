@@ -25,7 +25,7 @@ public class UserEndpointDefinition : IEndpointDefinition
 
 		builderDefination.App
 			.MapGet("v{version:apiVersion}/users/{id}", GetUserById)
-			.WithMetadata(new EndpointDeprecatedAttribute("This endpoint is Deprecated"))
+			.WithMetadata(new EndpointDeprecateAttribute("This endpoint is Deprecated"))
 			.GetUserbyIdFromApiEndpointSummary<Wrapper.Result<UserViewModel>>()
 			.WithApiVersionSet(builderDefination.ApiVersionSet)
 			.MapToApiVersion(mapToApiVersion);

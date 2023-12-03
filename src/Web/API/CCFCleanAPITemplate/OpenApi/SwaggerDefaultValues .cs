@@ -54,7 +54,7 @@ public class SwaggerDefaultValues : IOperationFilter
 	private static bool IsDeprecated(ApiDescription apiDescription)
 	{
 		return apiDescription.ActionDescriptor.EndpointMetadata
-			.OfType<EndpointDeprecatedAttribute>()
+			.OfType<EndpointDeprecateAttribute>()
 			.Any();
 	}
 }
