@@ -14,4 +14,4 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
     - name: Pack NuGet Package
-      run: nuget pack ./nupkg.nuspec -Properties Configuration=Release -NoDefaultExcludes
+      run: nuget pack ./nupkg.nuspec -OutputDirectory . -Properties Configuration=Release -NoDefaultExcludes
