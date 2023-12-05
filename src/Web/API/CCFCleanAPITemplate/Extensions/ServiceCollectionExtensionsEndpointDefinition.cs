@@ -1,5 +1,4 @@
-﻿using NLog.Web;
-using Application.Extensions;
+﻿using Application.Extensions;
 using Shared.ApiClientHanlder;
 using Infrastructure.Extensions;
 using CCFCleanAPITemplate.Middlewares;
@@ -13,22 +12,19 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
 	{
 		builderDefination.App.UseMiddleware<ApiResponseHandlerMiddleware>()
-							 .UseCors();
+							 .UseCorsDependencies();
 
 		builderDefination.App.MigrateDatabase();
 	}
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
-		builder.Services.AddTransient<ApiResponseHandlerMiddleware>();
-
-		builder.Host.UseNLog();
-		builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
-
-		builder.Services.RegisterDatabaseDependencies(builder.Configuration)
-						.RegisterCorsDependencies()
-						.RegisterInfrastructureDependencies()
-						.RegisterApplicationDependencies()
-						.RegisterSharedDependencies();
+		builder.LogDependencies();
+		builder.Services.RegisterResponseHandlerMiddlewares() 
+						.RegisterDatabaseDependencies(builder.Configuration)
+						.AddCorsDependencies()
+						.InfrastructureDependencies()
+						.ApplicationDependencies()
+						.SharedApiClientHandlerDependencies();
 	}
 }

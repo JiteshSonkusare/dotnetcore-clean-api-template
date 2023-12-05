@@ -7,7 +7,7 @@ namespace Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection services)
+    public static IServiceCollection ApplicationDependencies(this IServiceCollection services)
     {
         return services.AddAutoMapper(Assembly.GetExecutingAssembly())
                        .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()))

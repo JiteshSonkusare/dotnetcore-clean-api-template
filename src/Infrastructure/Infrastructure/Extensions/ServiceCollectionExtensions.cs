@@ -8,7 +8,7 @@ namespace Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterInfrastructureDependencies(this IServiceCollection services)
+    public static IServiceCollection InfrastructureDependencies(this IServiceCollection services)
     {
         return services
                 .AddTransient<IDateTimeService, SystemDateTimeService>()

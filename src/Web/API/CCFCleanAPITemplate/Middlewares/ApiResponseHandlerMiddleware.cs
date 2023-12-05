@@ -8,8 +8,6 @@ namespace CCFCleanAPITemplate.Middlewares;
 
 public class ApiResponseHandlerMiddleware : AbstractResponseHandlerMiddleware
 {
-    //public ApiResponseHandlerMiddleware(RequestDelegate next) : base(next) { }
-
 	public override (HttpStatusCode code, string message) HandleResponse(Exception exception)
 	{
 		var code = exception switch
