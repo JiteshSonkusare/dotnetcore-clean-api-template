@@ -20,6 +20,8 @@ public class ServiceCollectionExtensionsEndpointDefinition : IEndpointDefinition
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
+		builder.Services.AddTransient<ApiResponseHandlerMiddleware>();
+
 		builder.Host.UseNLog();
 		builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
 

@@ -7,16 +7,13 @@ using Application.Common.Exceptions;
 
 namespace CCFCleanAPITemplate.Middlewares;
 
-public abstract class AbstractResponseHandlerMiddleware
+public abstract class AbstractResponseHandlerMiddleware : IMiddleware
 {
-	private readonly RequestDelegate _next;
 	private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
-	public AbstractResponseHandlerMiddleware(RequestDelegate next) => _next = next;
 
 	public abstract (HttpStatusCode code, string message) HandleResponse(Exception exception);
 
-	public async Task InvokeAsync(HttpContext httpContext)
+	public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)
 	{
 		try
 		{
@@ -25,11 +22,9 @@ public abstract class AbstractResponseHandlerMiddleware
 				_logger.Error($"{nameof(httpContext)} is null");
 				throw new ArgumentNullException(nameof(httpContext));
 			}
-
 			_logger.Info($"RequestUri:{httpContext.Request.Scheme}://{httpContext.Request.Host}{httpContext.Request.Path}  " +
-						 $"Method: {httpContext.Request.Method}");
-
-			await _next(httpContext);
+										$"Method: {httpContext.Request.Method}");
+			await next(httpContext);
 
 			_logger.Info($"Response status code: {httpContext.Response.StatusCode}");
 		}

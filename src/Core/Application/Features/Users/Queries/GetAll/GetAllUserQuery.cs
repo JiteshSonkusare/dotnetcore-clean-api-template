@@ -6,6 +6,7 @@ using Domain.Entities;
 using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.ViewModels;
+using Application.Common.Exceptions;
 
 namespace Application.Features.Users.Queries.GetAll;
 
@@ -40,7 +41,7 @@ internal class GetUserQueryHandler : IRequestHandler<GetAllUserQuery, Result<Lis
         }
         catch (Exception ex)
         {
-            throw new Exception($"Failed to get user data! Error: {ex.Message}");
+            throw new GeneralApplicationException($"Failed to get user data! Error: {ex.Message}");
         }
     }
 }

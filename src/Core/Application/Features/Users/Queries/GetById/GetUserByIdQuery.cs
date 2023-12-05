@@ -4,6 +4,7 @@ using Shared.Wrapper;
 using Domain.Entities;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.ViewModels;
+using Application.Common.Exceptions;
 
 namespace Application.Features.Users.Queries.GetById;
 
@@ -35,7 +36,7 @@ internal class GetUserQueryHandler : IRequestHandler<GetUserByIdQuery, Result<Us
         }
         catch (Exception ex)
         {
-            throw new Exception($"Failed to get user data with id: {request.Id}! Error: {ex.Message}");
+            throw new GeneralApplicationException($"Failed to get user data with id: {request.Id}! Error: {ex.Message}");
         }
     }
 }
