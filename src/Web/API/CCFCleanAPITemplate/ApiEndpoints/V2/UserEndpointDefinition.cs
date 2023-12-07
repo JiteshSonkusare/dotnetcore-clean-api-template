@@ -33,7 +33,9 @@ public class UserEndpointDefinition : IEndpointDefinition
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
-		builder.Services.Configure<UserConfig>(builder.Configuration.GetSection(nameof(UserConfig)));
+		builder.Services.AddOptions<UserConfig>()
+						.Bind(builder.Configuration.GetSection(nameof(UserConfig)))
+						.ValidateDataAnnotations();
 	}
 
 	private async Task<IResult> Users(IMediator mediator)
