@@ -4,7 +4,7 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
 
 ## Build Status
 
-[![Nuget Push](https://github.com/JiteshSonkusare/dotnetcore-clean-api-template/actions/workflows/release.yml/badge.svg)](https://github.com/JiteshSonkusare/dotnetcore-clean-api-template/actions/workflows/release.yml)
+[![Build](https://github.com/JiteshSonkusare/dotnetcore-clean-api-template/actions/workflows/release.yml/badge.svg)](https://github.com/JiteshSonkusare/dotnetcore-clean-api-template/actions/workflows/release.yml)[![nuget](https://img.shields.io/nuget/v/CCF.Clean.Dotnet.WebAPI?label=version&logo=NuGet&style=flat-square)](https://www.nuget.org/packages/CCF.Clean.Dotnet.WebAPI)
 
 ## Key features
 
