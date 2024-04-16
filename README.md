@@ -26,8 +26,6 @@ CCF Clean Web API nuget template is ready-to-use project template for creating d
 
 ## Supported Versions
 
-- [x] .NET 6.0
-- [x] .NET 7.0
 - [x] .NET 8.0
 
 ## Getting started
