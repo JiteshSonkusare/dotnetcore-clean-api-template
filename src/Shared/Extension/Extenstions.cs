@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml.Serialization;
 using System.Text.Json.Serialization;
 
 namespace Shared.Extension;
@@ -47,4 +48,20 @@ public static class Extensions
         globalJsonSerializerOptions.DefaultIgnoreCondition = jsonIgnoreCondition;
         _ = globalJsonSerializerOptions.ToJson();
     }
+
+	/// <summary>
+	/// Convert xml to object
+	/// </summary>
+	/// <param name="xmlContent"></param>
+	/// <param name="objectType"></param>
+	/// <param name="customOptions"></param>
+	/// <returns>Deserilized object data</returns>
+	public static T? ConvertFromXml<T>(this string xmlContent)
+	{
+		if (string.IsNullOrWhiteSpace(xmlContent))
+			return default;
+		XmlSerializer serializer = new(typeof(T));
+		using StringReader reader = new(xmlContent);
+		return (T)serializer.Deserialize(reader)!;
+	}
 }

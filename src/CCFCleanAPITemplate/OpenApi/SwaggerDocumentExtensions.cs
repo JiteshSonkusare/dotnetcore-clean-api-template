@@ -1,14 +1,21 @@
 ﻿using CCFClean.Swagger;
 using CCFClean.Swagger.Configurations;
+using Dotnet8CleanCodeAPI.CustomHeader;
 
 namespace CCFCleanAPITemplate.OpenApi;
 
 internal static class SwaggerDocumentExtensions
 {
-	internal static IServiceCollection AddCCFSwaggerConfig(this IServiceCollection services, IConfiguration configuration)
+	/// <summary>
+	/// Extended method implemenation from CCF Clean Minimal Swagger Definition.
+	/// </summary>
+	/// <param name="services"></param>
+	/// <param name="configuration"></param>
+	/// <returns></returns>
+	internal static IServiceCollection AddCCFSwaggerExtenison(this IServiceCollection services, IConfiguration configuration)
 	{
 		services.AddCCFSwagger(opt =>
-		 {
+		{
 			 opt.OpenApiInfoExt = new OpenApiInfoExt
 			 {
 				 Title = "CCFCleanAPITemplate",
@@ -26,11 +33,17 @@ internal static class SwaggerDocumentExtensions
 				 NonSecuredVersions = ["v1"]
 			 };
 			 opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
-		 });
+			 opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
+		});
 		return services;
 	}
 
-	internal static WebApplication UseCCFSwaggerConfig(this WebApplication app)
+	/// <summary>
+	/// Extended method implementation from the CCF Clean Minimal Swagger Definition.
+	/// </summary>
+	/// <param name="app"></param>
+	/// <returns></returns>
+	internal static WebApplication UseCCFSwaggerDefinition(this WebApplication app)
 	{
 		app.UseCCFSwagger(opt =>
 		{

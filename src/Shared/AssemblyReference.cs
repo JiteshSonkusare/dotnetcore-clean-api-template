@@ -1,5 +1,3 @@
 ﻿namespace Shared;
 
-public class AssemblyReference
-{
-}
+public class AssemblyReference { }

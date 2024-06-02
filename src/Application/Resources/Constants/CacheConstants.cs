@@ -2,6 +2,6 @@
 
 public static class CacheConstants
 {
-    //Users Constants
-    public const string UsersCacheKey = "UsersCacheKey";
+    //User cache constants
+    public const string UserCacheKey = "UserCacheKey";
 }

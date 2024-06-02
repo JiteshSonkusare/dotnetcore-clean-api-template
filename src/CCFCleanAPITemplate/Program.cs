@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddEndpointDefinitions(typeof(Program).Assembly);
 builder.Services.AddCCFApiVersioning();
-builder.Services.AddCCFSwaggerConfig(builder.Configuration);
+builder.Services.AddCCFSwaggerExtenison(builder.Configuration);
+
 var app = builder.Build();
 
 app.MapEndpointDefinitions(opt =>
@@ -14,7 +15,6 @@ app.MapEndpointDefinitions(opt =>
 	opt.ApiVersions = builder.Configuration.GetSection("DefineApiVersion").Get<List<DefineApiVersion>>();
 	opt.ApiPathPrefix = "api";
 });
-app.UseCCFSwaggerConfig();
-app.UseHttpsRedirection();
+app.UseCCFSwaggerDefinition();
 
 app.Run();

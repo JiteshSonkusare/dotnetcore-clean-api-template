@@ -1,5 +1,3 @@
 ﻿namespace CCFCleanAPITemplate;
 
-public class AssemblyReference
-{
-}
+public class AssemblyReference { }

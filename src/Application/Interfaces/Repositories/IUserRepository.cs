@@ -1,12 +1,12 @@
 ﻿using Shared.Wrapper;
 using Shared.ApiClientHanlder;
-using Application.Features.Users.Queries.ViewModels;
+using Application.Features.Users.Dtos;
 
 namespace Application.Interfaces.Repositories;
 
 public interface IUserRepository
 {
-    Task<bool> UserIdExists(string? userId);
+    Task<bool> IsUserIdUniqueAsync(string? userId);
 
-    Task<Response<Result<List<UserViewModel>>>> GetUsersFromApiCall(CancellationToken cancellation);
+    Task<Response<Result<List<UserDto>>>> GetUsersFromApiCall(CancellationToken cancellation);
 }

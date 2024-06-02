@@ -1,146 +1,58 @@
-﻿namespace Shared.Wrapper;
+﻿using System.Text.Json.Serialization;
 
-public class Result : IResult
+namespace Shared.Wrapper;
+
+/// <summary>
+/// Code - unique name for the error in the application
+/// Description - contains developer-friendly details about the error
+/// </summary>
+/// <param name="Code"></param>
+/// <param name="Description"></param>
+public sealed record Error(string Code, string Description)
 {
-    public Result()
-    {
-    }
-
-    public List<string> Messages { get; set; } = new List<string>();
-
-    public bool Succeeded { get; set; }
-
-    public static IResult Fail()
-    {
-        return new Result { Succeeded = false };
-    }
-
-    public static IResult Fail(string message)
-    {
-        return new Result { Succeeded = false, Messages = new List<string> { message } };
-    }
-
-    public static IResult Fail(List<string> messages)
-    {
-        return new Result { Succeeded = false, Messages = messages };
-    }
-
-    public static Task<IResult> FailAsync()
-    {
-        return Task.FromResult(Fail());
-    }
-
-    public static Task<IResult> FailAsync(string message)
-    {
-        return Task.FromResult(Fail(message));
-    }
-
-    public static Task<IResult> FailAsync(List<string> messages)
-    {
-        return Task.FromResult(Fail(messages));
-    }
-
-    public static IResult Success()
-    {
-        return new Result { Succeeded = true };
-    }
-
-    public static IResult Success(string message)
-    {
-        return new Result { Succeeded = true, Messages = new List<string> { message } };
-    }
-
-    public static Task<IResult> SuccessAsync()
-    {
-        return Task.FromResult(Success());
-    }
-
-    public static Task<IResult> SuccessAsync(string message)
-    {
-        return Task.FromResult(Success(message));
-    }
+	public static readonly Error None = new(string.Empty, string.Empty);
 }
 
-public class Result<T> : Result, IResult<T>
+/// <summary>
+/// Use to implement functional result pattern.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class Result<T>
 {
-    public Result()
-    {
-    }
+	public bool Succeeded { get; set; }
+	public string? Messages { get; set; }
+	public T Data { get; set; } = default!;
 
-    public T Data { get; set; } = default!;
+	[JsonIgnore]
+	public Error? Error { get; set; }
 
-    public new static Result<T> Fail()
-    {
-        return new Result<T> { Succeeded = false };
-    }
+	public static Result<T> Failure(Error? error)
+	{
+		return new Result<T> { Succeeded = false, Messages = error?.Description, Error = error };
+	}
 
-    public new static Result<T> Fail(string message)
-    {
-        return new Result<T> { Succeeded = false, Messages = new List<string> { message } };
-    }
+	public static Task<Result<T>> FailureAsync(Error? error)
+	{
+		return Task.FromResult(Failure(error));
+	}
 
-    public new static Result<T> Fail(List<string> messages)
-    {
-        return new Result<T> { Succeeded = false, Messages = messages };
-    }
+	public static Result<T> Success(string? message = null)
+	{
+		return new Result<T> { Succeeded = true, Messages = message };
+	}
 
-    public new static Task<Result<T>> FailAsync()
-    {
-        return Task.FromResult(Fail());
-    }
+	public static Result<T> Success(T data, string? message = null)
+	{
+		return new Result<T> { Succeeded = true, Data = data, Messages = message };
+	}
 
-    public new static Task<Result<T>> FailAsync(string message)
-    {
-        return Task.FromResult(Fail(message));
-    }
+	public static Task<Result<T>> SuccessAsync(string? message = null)
+	{
+		return Task.FromResult(Success(message));
+	}
 
-    public new static Task<Result<T>> FailAsync(List<string> messages)
-    {
-        return Task.FromResult(Fail(messages));
-    }
-
-    public new static Result<T> Success()
-    {
-        return new Result<T> { Succeeded = true };
-    }
-
-    public new static Result<T> Success(string message)
-    {
-        return new Result<T> { Succeeded = true, Messages = new List<string> { message } };
-    }
-
-    public static Result<T> Success(T data)
-    {
-        return new Result<T> { Succeeded = true, Data = data };
-    }
-
-    public static Result<T> Success(T data, string message)
-    {
-        return new Result<T> { Succeeded = true, Data = data, Messages = new List<string> { message } };
-    }
-
-    public static Result<T> Success(T data, List<string> messages)
-    {
-        return new Result<T> { Succeeded = true, Data = data, Messages = messages };
-    }
-
-    public new static Task<Result<T>> SuccessAsync()
-    {
-        return Task.FromResult(Success());
-    }
-
-    public new static Task<Result<T>> SuccessAsync(string message)
-    {
-        return Task.FromResult(Success(message));
-    }
-
-    public static Task<Result<T>> SuccessAsync(T data)
-    {
-        return Task.FromResult(Success(data));
-    }
-
-    public static Task<Result<T>> SuccessAsync(T data, string message)
-    {
-        return Task.FromResult(Success(data, message));
-    }
+	public static Task<Result<T>> SuccessAsync(T data, string? message = null)
+	{
+		return Task.FromResult(Success(data, message));
+	}
 }

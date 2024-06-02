@@ -1,14 +1,13 @@
 ﻿using Shared.Wrapper;
 using System.Net.Mime;
 using Domain.Entities;
-using Domain.ViewModels;
 using Domain.Configs.User;
 using Shared.ApiClientHanlder;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Application.Features.Users.Dtos;
 using Application.Interfaces.Repositories;
-using Application.Features.Users.Queries.ViewModels;
-using Application.Common.Exceptions;
+using Application.Common.ExceptionHandlers;
 
 namespace Infrastructure.Respositories;
 
@@ -25,12 +24,20 @@ public class UserRepository : IUserRepository
 		_userConfig = userConfig.Value;
 	}
 
-	public async Task<bool> UserIdExists(string? userId)
+	public async Task<bool> IsUserIdUniqueAsync(string? userId)
 	{
-		return await _repository.Entities.AnyAsync(b => b.UserId.Equals(userId));
+		try
+		{
+			return await _repository.Entities.AnyAsync(b => b.UserId.Equals(userId));
+		}
+		catch (Exception ex)
+		{
+			throw ex.With(ex.Message, ex.Source, ex.InnerException?.Message, ex.StackTrace)
+					.DetailData(nameof(userId), userId ?? string.Empty);
+		}
 	}
 
-	public async Task<Response<Result<List<UserViewModel>>>> GetUsersFromApiCall(CancellationToken cancellation)
+	public async Task<Response<Result<List<UserDto>>>> GetUsersFromApiCall(CancellationToken cancellation)
 	{
 		try
 		{
@@ -41,16 +48,16 @@ public class UserRepository : IUserRepository
 					Method = HttpMethod.Get,
 					AuthHandler = null,
 					RequestHeaders = Array.Empty<HeaderData>(),
-					RequestContent = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("", "") }),
-					DefaultRequestHeaders = new DefaultRequestHeaders(new string[] { MediaTypeNames.Application.Json }, Array.Empty<HeaderData>())
+					DefaultRequestHeaders = new DefaultRequestHeaders(new string[] { MediaTypeNames.Application.Json }, Array.Empty<HeaderData>()),
+					RequestContent = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("", "") })
 				},
 				cancellation);
 
-			return new Response<Result<List<UserViewModel>>>(result, result.StatusCode);
+			return new Response<Result<List<UserDto>>>(result, false, result.StatusCode);
 		}
 		catch (Exception ex)
 		{
-			throw new GeneralApplicationException(ex.Message);
+			throw ex.With();
 		}
 	}
 }

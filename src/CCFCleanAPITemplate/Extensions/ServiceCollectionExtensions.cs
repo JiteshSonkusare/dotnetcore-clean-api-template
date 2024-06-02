@@ -1,7 +1,7 @@
 ﻿using NLog.Web;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using CCFCleanAPITemplate.Middlewares;
+using CCFCleanAPITemplate.ExceptionHandler;
 
 namespace API.Extensions;
 
@@ -19,23 +19,33 @@ public static class ServiceCollectionExtensions
 
 	#endregion
 
+	#region Exception Handler
+
+	internal static IServiceCollection RegisterExceptionHandler(this IServiceCollection services)
+	{
+		return services.AddExceptionHandler<GlobalExceptionHandler>()
+					   .AddProblemDetails();
+	}
+
+	#endregion
+
 	#region RepsonseHandlingMiddlewares
 
-	internal static IServiceCollection RegisterResponseHandlerMiddlewares(this IServiceCollection services)
-	{
-		var baseType = typeof(AbstractResponseHandlerMiddleware);
+	//internal static IServiceCollection RegisterResponseHandlerMiddlewares(this IServiceCollection services)
+	//{
+	//	var baseType = typeof(AbstractResponseHandlerMiddleware);
 
-		var responseHandlerMiddlewareTypes = baseType.Assembly
-			.ExportedTypes
-			.Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.IsSubclassOf(baseType));
+	//	var responseHandlerMiddlewareTypes = baseType.Assembly
+	//		.ExportedTypes
+	//		.Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.IsSubclassOf(baseType));
 
-		foreach (var middlewareType in responseHandlerMiddlewareTypes)
-		{
-			services.AddTransient(middlewareType);
-		}
+	//	foreach (var middlewareType in responseHandlerMiddlewareTypes)
+	//	{
+	//		services.AddTransient(middlewareType);
+	//	}
 
-		return services;
-	}
+	//	return services;
+	//}
 
 	#endregion
 

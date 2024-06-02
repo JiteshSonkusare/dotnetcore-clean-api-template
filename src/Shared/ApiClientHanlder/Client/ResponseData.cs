@@ -31,7 +31,9 @@ public sealed class ResponseData
 
     public object? ConvertContent(Type objectType, JsonSerializerOptions? options = null) => Content.ConvertFromJson(objectType, options);
 
-    internal ResponseData(HttpStatusCode statusCode, string content, HttpResponseHeaders responseHeaders, HttpResponseHeaders trailingHeaders)
+	public T? ConvertXmlContent<T>() => Content.ConvertFromXml<T?>();
+
+	internal ResponseData(HttpStatusCode statusCode, string content, HttpResponseHeaders responseHeaders, HttpResponseHeaders trailingHeaders)
     {
         StatusCode = (int)statusCode;
         Content = content;

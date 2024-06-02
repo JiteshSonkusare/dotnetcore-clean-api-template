@@ -4,17 +4,24 @@ namespace Domain.ViewModels;
 
 public record ApiFailureResponse
 {
-	[JsonPropertyName("source")]
-	public string? Source { get; set; }
+	[JsonPropertyName("title")]
+	public string? Title { get; set; }
 
 	[JsonPropertyName("status")]
 	public string? Status { get; set; }
 
-	[JsonPropertyName("message")]
-	public string? Message { get; set; }
+	[JsonPropertyName("instance")]
+	public string? Instance { get; set; }
 
-	[JsonExtensionData]
-	public IDictionary<string, object?> Extensions { get; set; } = new Dictionary<string, object?>(StringComparer.Ordinal);
+	[JsonPropertyName("errorCode")]
+	public string? ErrorCode { get; set; }
 
-	public override string ToString() => $"type:{Source}|status:{Status}|message:{Message}|extensions:{Extensions}";
+	[JsonPropertyName("traceId")]
+	public string? TraceId { get; set; }
+
+	[JsonPropertyName("Detail")]
+	public string? Detail { get; set; }
+
+	[JsonPropertyName("errorDescription")]
+	public IDictionary<string, object?>? ErrorDescription { get; set; }
 }
