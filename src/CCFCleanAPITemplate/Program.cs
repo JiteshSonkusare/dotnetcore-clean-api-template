@@ -15,6 +15,6 @@ app.MapEndpointDefinitions(opt =>
 	opt.ApiVersions = builder.Configuration.GetSection("DefineApiVersion").Get<List<DefineApiVersion>>();
 	opt.ApiPathPrefix = "api";
 });
-app.UseCCFSwaggerDefinition();
+app.UseCCFSwaggerExtension();
 
 app.Run();

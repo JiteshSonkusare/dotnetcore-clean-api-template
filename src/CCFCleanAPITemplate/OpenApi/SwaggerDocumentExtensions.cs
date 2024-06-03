@@ -43,7 +43,7 @@ internal static class SwaggerDocumentExtensions
 	/// </summary>
 	/// <param name="app"></param>
 	/// <returns></returns>
-	internal static WebApplication UseCCFSwaggerDefinition(this WebApplication app)
+	internal static WebApplication UseCCFSwaggerExtension(this WebApplication app)
 	{
 		app.UseCCFSwagger(opt =>
 		{
