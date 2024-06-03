@@ -27,11 +27,11 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
 			{
 				await _unitOfWork.Repository<User>().DeleteAsync(user);
 				await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UserCacheKey);
-				return await Result<Guid>.SuccessAsync(request.Id, "User Deleted");
+				return Result.Success(request.Id);
 			}
 			else
 			{
-				return await Result<Guid>.FailureAsync(UserError.NotFoundWithId(request.Id));
+				return Result.Failure<Guid>(UserError.NotFoundWithId(request.Id));
 			}
 		}
 		catch (Exception ex)

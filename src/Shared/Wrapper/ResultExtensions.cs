@@ -7,6 +7,6 @@ public static class ResultExtensions
 		Func<Result<TResult>, TOutput> onSuccess,
 		Func<Result<TResult>, TOutput> onFailure)
 	{
-		return result.Succeeded ? onSuccess(result) : onFailure(result);
+		return result.IsFailure ? onFailure(result) : onSuccess(result);
 	}
 }

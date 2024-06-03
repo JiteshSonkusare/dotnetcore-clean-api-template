@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions
 {
 	#region Log
 
-	internal static WebApplicationBuilder LogDependencies(this WebApplicationBuilder builder)
+	internal static WebApplicationBuilder NLoggerDependencies(this WebApplicationBuilder builder)
 	{
 		builder.Host.UseNLog();
 		builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
@@ -26,26 +26,6 @@ public static class ServiceCollectionExtensions
 		return services.AddExceptionHandler<GlobalExceptionHandler>()
 					   .AddProblemDetails();
 	}
-
-	#endregion
-
-	#region RepsonseHandlingMiddlewares
-
-	//internal static IServiceCollection RegisterResponseHandlerMiddlewares(this IServiceCollection services)
-	//{
-	//	var baseType = typeof(AbstractResponseHandlerMiddleware);
-
-	//	var responseHandlerMiddlewareTypes = baseType.Assembly
-	//		.ExportedTypes
-	//		.Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.IsSubclassOf(baseType));
-
-	//	foreach (var middlewareType in responseHandlerMiddlewareTypes)
-	//	{
-	//		services.AddTransient(middlewareType);
-	//	}
-
-	//	return services;
-	//}
 
 	#endregion
 

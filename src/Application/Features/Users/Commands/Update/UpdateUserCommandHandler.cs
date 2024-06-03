@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Shared.Wrapper;
 using Domain.Entities;
-using Application.Common.Exceptions;
 using Application.Features.Users.Dtos;
 using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
@@ -24,7 +23,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Resul
 		{
 			var entity = await _unitOfWork.Repository<User>().GetByIdAsync(request.Id);
 			if (entity == null)
-				return await Result<Guid>.FailureAsync(UserError.NotFoundWithId(request.Id));
+				return Result.Failure<Guid>(UserError.NotFoundWithId(request.Id));
 			else
 			{
 				entity.FirstName = request.FirstName ?? entity.FirstName;
@@ -37,7 +36,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Resul
 
 				await _unitOfWork.Repository<User>().UpdateAsync(entity);
 				await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UserCacheKey);
-				return await Result<Guid>.SuccessAsync(request.Id, "User Updated Successfully!");
+				return Result.Success(request.Id);
 			}
 		}
 		catch (Exception ex)

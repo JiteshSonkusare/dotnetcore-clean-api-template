@@ -9,15 +9,12 @@ namespace Application.Common.Behaviors;
 public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAccessor httpContextAccessor)
 	: IPipelineBehavior<TRequest, TResponse>
 	  where TRequest : IRequest<TResponse>
-	  where TResponse : Result<TResponse>
+	  where TResponse : Result
 {
 	private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 	private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
-	public async Task<TResponse> Handle(
-		TRequest request,
-		RequestHandlerDelegate<TResponse> next,
-		CancellationToken cancellationToken)
+	public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 	{
 		var correlationId = Guid.NewGuid();
 		var httpContext = _httpContextAccessor.HttpContext;
@@ -35,8 +32,8 @@ public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAcc
 
 		var result = await next();
 
-		// Error Logging
-		if (!result.Succeeded)
+		//Error Logging
+		if (!result.IsFailure)
 			_logger.Error($"Request failure " +
 				$"{typeof(TRequest).Name}, " +
 				$"{result.Error}, " +

@@ -27,7 +27,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
 			var entity = _mapper.Map<User>(command);
 			await _unitOfWork.Repository<User>().AddAsync(entity);
 			await _unitOfWork.CommitAndRemoveCacheAsync(cancellationToken, CacheConstants.UserCacheKey);
-			return await Result<Guid>.SuccessAsync(entity.Id, "User Created Successfully!");
+			return Result.Create(entity.Id);
 		}
 		catch (Exception ex)
 		{

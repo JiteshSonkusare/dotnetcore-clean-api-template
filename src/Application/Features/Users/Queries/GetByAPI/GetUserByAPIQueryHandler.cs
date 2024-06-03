@@ -24,9 +24,9 @@ internal class GetUserByAPIQueryHandler : IRequestHandler<GetUserByAPIQuery, Res
 		{
 			var response = await _userRepository.GetUsersFromApiCall(cancellationToken);
 			if (response.Data?.Data == null)
-				return await Result<List<UserDto>>.FailureAsync(UserError.NotFound);
+				return Result.Failure<List<UserDto>>(UserError.NotFound);
 			var mappedUser = _mapper.Map<List<UserDto>>(response.Data?.Data);
-			return await Result<List<UserDto>>.SuccessAsync(mappedUser, "succeeded.");
+			return Result.Success(mappedUser);
 		}
 		catch (Exception ex)
 		{

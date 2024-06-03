@@ -25,9 +25,9 @@ internal class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Resul
 		{
 			var user = await _unitOfWork.Repository<User>().GetByIdAsync(request.Id);
 			if (user == null)
-				return await Result<UserDto>.FailureAsync(UserError.NotFoundWithId(request.Id));
+				return Result.Failure<UserDto>(UserError.NotFoundWithId(request.Id));
 			var mappedUser = _mapper.Map<UserDto>(user);
-			return await Result<UserDto>.SuccessAsync(mappedUser);
+			return Result.Success(mappedUser);
 		}
 		catch (Exception ex)
 		{

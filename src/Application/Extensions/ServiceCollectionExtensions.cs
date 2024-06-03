@@ -9,7 +9,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection ApplicationDependencies(this IServiceCollection services)
     {
-
 		return services.AddAutoMapper(Assembly.GetExecutingAssembly())
 						.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
 						.AddMediatR(cfg =>
