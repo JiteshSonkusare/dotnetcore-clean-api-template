@@ -20,11 +20,13 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 			.WithMessage("Mobile should not be null/empty.");
 
 		RuleFor(c => c.UserId)
-		.NotEmpty()
-		.WithMessage("UserId should not be null/empty.")
-		.MustAsync(async (userId, _) =>
-		{
-			return await userRepository.IsUserIdUniqueAsync(userId);
-		}).WithMessage("UserId must be unique.");
+			.NotEmpty()
+			.WithMessage("UserId should not be null/empty.")
+			.MustAsync(async (userId, cancellationToken) =>
+			{
+				bool isUnique = await userRepository.IsUserIdUniqueAsync(userId);
+				return !isUnique;
+			})
+			.WithMessage("UserId must be unique.");
 	}
 }

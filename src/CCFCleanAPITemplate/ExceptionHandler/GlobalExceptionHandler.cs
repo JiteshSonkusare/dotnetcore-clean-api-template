@@ -21,7 +21,8 @@ public class GlobalExceptionHandler() : IExceptionHandler
         if (exception is ValidationException validationException)
         {
             problemDetails = CreateValidationProblemDetails(httpContext, validationException);
-        }
+			httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+		}
         else
         {
             problemDetails = CreateProblemDetails(httpContext, exception);
@@ -29,6 +30,7 @@ public class GlobalExceptionHandler() : IExceptionHandler
 
         var json = MiddlewareExtensions.ToJson(problemDetails, _logger);
         httpContext.Response.ContentType = MediaTypeNames.Application.ProblemJson;
+        
         _logger.Error(json);
         await httpContext.Response.WriteAsync(json, cancellationToken);
 

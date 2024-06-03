@@ -27,7 +27,7 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 				if (model.Id != Guid.Empty)
 				{
 					bool exists = await userRepository.IsUserIdUniqueAsync(userId);
-					return !exists;
+					return exists;
 				}
 				return true;
 			})
