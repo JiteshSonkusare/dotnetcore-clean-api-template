@@ -118,7 +118,7 @@ public class UserEndpoints : IEndpointDefinition
 		.MapToApiVersion(mapToApiVersion);
 	}
 
-	// Register dependency injection related to this class (functionality).
+	// Register dependency injection related to this class/functionality.
 	public void DefineServices(WebApplicationBuilder builder)
 	{
 		builder.Services
