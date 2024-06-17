@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions
 {
 	#region Log
 
-	internal static WebApplicationBuilder NLoggerDependencies(this WebApplicationBuilder builder)
+	internal static WebApplicationBuilder LogDependencies(this WebApplicationBuilder builder)
 	{
 		builder.Host.UseNLog();
 		builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
@@ -66,6 +66,20 @@ public static class ServiceCollectionExtensions
 			app.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDBContext>().Database.EnsureCreated();
 
 		return app;
+	}
+
+	#endregion
+
+	#region Environment Configuration
+
+	public static IConfigurationBuilder SetEnvironmentConfiguration(this WebApplicationBuilder builder)
+	{
+		return
+			builder.Configuration
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+				.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+				.AddEnvironmentVariables();
 	}
 
 	#endregion

@@ -26,10 +26,7 @@ public record ExceptionDataEntry
 
 	public static ExceptionDataEntry FromValue(in object value)
 	{
-		if (value == null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
+		ArgumentNullException.ThrowIfNull(value);
 
 		var json = JsonSerializer.Serialize(value, SerializerOptions);
 		return new ExceptionDataEntry(value, json);

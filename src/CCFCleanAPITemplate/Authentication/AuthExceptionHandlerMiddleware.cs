@@ -19,7 +19,7 @@ public static class AuthExceptionHandlerMiddleware
 					httpContext.Response.ContentType = MediaTypeNames.Application.ProblemJson;
 					await httpContext.Response.WriteAsync(
 						JsonSerializer.Serialize(
-							CreateProblemDetails(httpContext).ToString()));
+							CreateProblemDetails(httpContext)));
 				}
 			});
 	}

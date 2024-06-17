@@ -17,7 +17,8 @@ public class ServiceCollectionExtensionsDefinition : IEndpointDefinition
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
-		builder.NLoggerDependencies();
+		builder.SetEnvironmentConfiguration();
+		builder.LogDependencies();
 		builder.Services.AddHttpContextAccessor();
 		builder.Services.RegisterDatabaseDependencies(builder.Configuration)
 						.AddCorsDependencies()

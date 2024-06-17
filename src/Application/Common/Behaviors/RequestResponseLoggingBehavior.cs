@@ -33,7 +33,7 @@ public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAcc
 		var result = await next();
 
 		//Error Logging
-		if (!result.IsFailure)
+		if (result.IsFailure)
 			_logger.Error($"Request failure " +
 				$"{typeof(TRequest).Name}, " +
 				$"{result.Error}, " +

@@ -16,24 +16,24 @@ internal static class SwaggerDocumentExtensions
 	{
 		services.AddCCFSwagger(opt =>
 		{
-			 opt.OpenApiInfoExt = new OpenApiInfoExt
-			 {
-				 Title = "CCFCleanAPITemplate",
-				 Description = "Swagger documentation for an CCFCleanAPITemplate api",
-				 OpenApiContactExt = new OpenApiContactExt()
-				 {
-					 Name = "Jitesh Sonkusare",
-					 Email = "jitesh.sonkusare@contoso.no",
-					 Url = new Uri("https://contoso.no")
-				 }
-			 };
-			 opt.SecurityExt = new SecurityExt
-			 {
-				 IsSecured = true,
-				 NonSecuredVersions = ["v1"]
-			 };
-			 opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
-			 opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
+			opt.OpenApiInfoExt = new OpenApiInfoExt
+			{
+				Title = "CCFCleanAPITemplate",
+				Description = "Swagger documentation for an CCFCleanAPITemplate api",
+				OpenApiContactExt = new OpenApiContactExt()
+				{
+					Name = "Jitesh Sonkusare",
+					Email = "jitesh.sonkusare@contoso.no",
+					Url = new Uri("https://contoso.no")
+				}
+			};
+			opt.SecurityExt = new SecurityExt
+			{
+				IsSecured = true,
+				NonSecuredVersions = ["v1"]
+			};
+			opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
+			opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
 		});
 		return services;
 	}
