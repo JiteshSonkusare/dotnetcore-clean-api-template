@@ -1,14 +1,13 @@
 ﻿using Microsoft.OpenApi.Models;
 using CCFClean.Minimal.CustomHeader;
-using CCFCleanAPITemplate.CustomeHeaders;
 
-namespace Dotnet8CleanCodeAPI.CustomHeader;
+namespace CCFCleanAPITemplate.CustomHeader;
 
 public class GlobalHeaders : IGlobalHeaders
 {
 	private readonly Dictionary<string, string> data = new();
 
-    public void AddCustomHeader(string propertyName, string value)
+	public void AddCustomHeader(string propertyName, string value)
 	{
 		data[propertyName] = value;
 	}
@@ -19,6 +18,6 @@ public class GlobalHeaders : IGlobalHeaders
 	[HeaderInfo("X-UserId", "string", Description = "Internal employee Id", IsRequired = true)]
 	public string UserId => data.ContainsKey(nameof(UserId)) ? data[nameof(UserId)] : string.Empty;
 
-	[HeaderInfo("X-UserType", "string", Description = "Internal user type.", ParameterIn = ParameterLocation.Query, AllowedValues = "Agent, System", DefaultValue ="System")]
+	[HeaderInfo("X-UserType", "string", Description = "Internal user type.", ParameterIn = ParameterLocation.Query, AllowedValues = "Agent, System", DefaultValue = "System")]
 	public string UserType => data.ContainsKey(nameof(UserType)) ? data[nameof(UserType)] : string.Empty;
 }

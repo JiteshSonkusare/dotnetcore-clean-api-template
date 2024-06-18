@@ -1,6 +1,5 @@
 ﻿using CCFClean.Swagger;
 using CCFClean.Swagger.Configurations;
-using Dotnet8CleanCodeAPI.CustomHeader;
 
 namespace CCFCleanAPITemplate.OpenApi;
 
@@ -33,7 +32,7 @@ internal static class SwaggerDocumentExtensions
 				NonSecuredVersions = ["v1"]
 			};
 			opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
-			//opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
+			opt.EnableGlobalHeader = true;
 		});
 		return services;
 	}

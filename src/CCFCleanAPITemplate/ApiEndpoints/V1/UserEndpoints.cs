@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Wrapper = Shared.Wrapper;
 using CCFClean.Minimal.Definition;
 using Infrastructure.Respositories;
+using CCFClean.Minimal.CustomHeader;
 using Application.Features.Users.Dtos;
-using CCFCleanAPITemplate.CustomeHeaders;
+using CCFCleanAPITemplate.CustomHeader;
 using Application.Features.Users.Commands;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.GetAll;
@@ -57,10 +58,12 @@ public class UserEndpoints : IEndpointDefinition
 			ISender sender,
 			IGlobalHeaders globalHeaders) =>
 		{
+			var headers = (GlobalHeaders)globalHeaders;
+
 			var command = new CreateUserCommand(
 				request.FirstName,
 				request.LastName,
-				globalHeaders.UserId,
+				headers.UserId,
 				request.Mobile,
 				request.Phone,
 				request.Address,
@@ -80,13 +83,15 @@ public class UserEndpoints : IEndpointDefinition
 		endpoint.MapPut("users/update", async (
 			[FromBody] UpdateUserRequest request,
 			ISender sender,
-			IGlobalHeaders globalHeaders) =>
+			HttpContext httpContext) =>
 		{
+			var headers = httpContext.Items["GlobalHeaders"] as GlobalHeaders;
+
 			var command = new UpdateUserCommand(
 				request.Id,
 				request.FirstName,
 				request.LastName,
-				globalHeaders.UserId,
+				headers?.UserId,
 				request.Mobile,
 				request.Phone,
 				request.Address,
@@ -118,7 +123,7 @@ public class UserEndpoints : IEndpointDefinition
 		.MapToApiVersion(mapToApiVersion);
 	}
 
-	// Register dependency injection related to this class/functionality.
+	// Add dependencies to DI related to this class/functionality.
 	public void DefineServices(WebApplicationBuilder builder)
 	{
 		builder.Services

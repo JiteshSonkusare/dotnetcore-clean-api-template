@@ -1,14 +1,12 @@
 ﻿using CCFClean.Minimal.Definition;
-using Dotnet8CleanCodeAPI.CustomHeader;
+using CCFClean.Minimal.CustomHeader;
+using CCFCleanAPITemplate.CustomHeader;
 
 namespace CCFCleanAPITemplate.CustomeHeaders.Definitions;
 
 public class CustomerHeaderDefinition : IEndpointDefinition
 {
-	public void DefineEndpoints(AppBuilderDefinition app)
-	{
-		app.App.UseMiddleware<CustomHeaderMiddleware>();
-	}
+	public void DefineEndpoints(AppBuilderDefinition app) { }
 
 	public void DefineServices(WebApplicationBuilder builder)
 	{
