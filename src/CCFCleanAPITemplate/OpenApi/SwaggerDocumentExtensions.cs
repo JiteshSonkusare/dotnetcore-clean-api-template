@@ -33,7 +33,7 @@ internal static class SwaggerDocumentExtensions
 				NonSecuredVersions = ["v1"]
 			};
 			opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
-			opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
+			//opt.GlobalHeaderType = typeof(GlobalHeaders); // If you need GlobalCustomHeader.
 		});
 		return services;
 	}
