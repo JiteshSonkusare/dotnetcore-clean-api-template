@@ -85,7 +85,7 @@ public class UserEndpoints : IEndpointDefinition
 			ISender sender,
 			HttpContext httpContext) =>
 		{
-			var headers = httpContext.Items["GlobalHeaders"] as GlobalHeaders;
+			var headers = httpContext.Items[typeof(GlobalHeaders)] as GlobalHeaders;
 
 			var command = new UpdateUserCommand(
 				request.Id,
