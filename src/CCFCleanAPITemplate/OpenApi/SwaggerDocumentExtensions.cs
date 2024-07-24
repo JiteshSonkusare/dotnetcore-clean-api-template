@@ -18,7 +18,7 @@ internal static class SwaggerDocumentExtensions
 			opt.OpenApiInfoExt = new OpenApiInfoExt
 			{
 				Title = "CCFCleanAPITemplate",
-				Description = "Swagger documentation for an CCFCleanAPITemplate api",
+				Description = "Swagger documentation for an CCFCleanAPITemplate API",
 				OpenApiContactExt = new OpenApiContactExt()
 				{
 					Name = "Jitesh Sonkusare",

@@ -7,6 +7,18 @@ public static class ResultExtensions
 		Func<Result<TResult>, TOutput> onSuccess,
 		Func<Result<TResult>, TOutput> onFailure)
 	{
-		return result.IsFailure ? onFailure(result) : onSuccess(result);
+		return result.IsFailure 
+				? onFailure(result) 
+				: onSuccess(result);
+	}
+
+	public static TOutput Match<TOutput>(
+		this Result result,
+		Func<Result, TOutput> onSuccess,
+		Func<Result, TOutput> onFailure)
+	{
+		return result.IsFailure 
+				? onFailure(result) 
+				: onSuccess(result);
 	}
 }

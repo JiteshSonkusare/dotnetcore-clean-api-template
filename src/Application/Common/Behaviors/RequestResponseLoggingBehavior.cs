@@ -3,14 +3,16 @@ using MediatR;
 using Shared.Wrapper;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Application.Common.Interfaces;
 
 namespace Application.Common.Behaviors;
 
-public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAccessor httpContextAccessor)
+public class RequestResponseLoggingBehavior<TRequest, TResponse>(IDateTimeService dateTimeService, IHttpContextAccessor httpContextAccessor)
 	: IPipelineBehavior<TRequest, TResponse>
 	  where TRequest : IRequest<TResponse>
 	  where TResponse : Result
 {
+	private readonly IDateTimeService _dateTimeService = dateTimeService;
 	private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 	private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
@@ -23,7 +25,7 @@ public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAcc
 		var requstestUri = $"RequestUri: " +
 			$"{httpContext?.Request.Method} " +
 			$"{httpContext?.Request.Scheme}://{httpContext?.Request.Host}{httpContext?.Request.Path}   " +
-			$"Time: {DateTime.UtcNow}";
+			$"Time: {_dateTimeService.Now}";
 		var requstestUriJson = JsonSerializer.Serialize(requstestUri);
 		_logger.Info($"Executing request: {correlationId}: {requstestUriJson}");
 
@@ -37,7 +39,7 @@ public class RequestResponseLoggingBehavior<TRequest, TResponse>(IHttpContextAcc
 			_logger.Error($"Request failure " +
 				$"{typeof(TRequest).Name}, " +
 				$"{result.Error}, " +
-				$"{DateTime.UtcNow}");
+				$"{_dateTimeService.Now}");
 
 		// Log response
 		var responseJson = JsonSerializer.Serialize(result);

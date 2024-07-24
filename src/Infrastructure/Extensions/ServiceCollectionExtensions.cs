@@ -1,8 +1,8 @@
-﻿using Infrastructure.Services;
-using Infrastructure.Respositories;
+﻿using Infrastructure.Respositories;
 using Application.Common.Interfaces;
 using Application.Interfaces.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.Services.Common;
 
 namespace Infrastructure.Extensions;
 

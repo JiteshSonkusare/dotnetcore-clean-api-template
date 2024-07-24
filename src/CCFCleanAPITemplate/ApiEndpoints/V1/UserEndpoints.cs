@@ -36,7 +36,6 @@ public class UserEndpoints : IEndpointDefinition
 		.GetAllUserEndpointSummary<Wrapper.Result<List<UserDto>>>()
 		.MapToApiVersion(mapToApiVersion);
 
-
 		//Get: GetById
 		endpoint.MapGet("users/{id:guid}", async (
 			Guid id,

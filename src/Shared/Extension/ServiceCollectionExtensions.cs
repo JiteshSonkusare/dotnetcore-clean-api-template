@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Shared.ApiClientHanlder;
+﻿using Shared.ApiClientHanlder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Shared.Extension;
 

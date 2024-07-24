@@ -29,8 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architecture.Tests", "Archi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCFCleanAPITemplate", "CCFCleanAPITemplate\CCFCleanAPITemplate.csproj", "{8A47EE4C-A240-47E5-B576-D7CA5606B682}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCFCleanMinimalApiLib", "..\..\dotnetcore-ccf-clean-minimal-api-library\src\CCFCleanMinimalApiLib\CCFCleanMinimalApiLib.csproj", "{3D55B001-7EA6-4C7C-A735-D3E1B90FB191}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,10 +59,6 @@ Global
 		{8A47EE4C-A240-47E5-B576-D7CA5606B682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A47EE4C-A240-47E5-B576-D7CA5606B682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A47EE4C-A240-47E5-B576-D7CA5606B682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D55B001-7EA6-4C7C-A735-D3E1B90FB191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D55B001-7EA6-4C7C-A735-D3E1B90FB191}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D55B001-7EA6-4C7C-A735-D3E1B90FB191}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D55B001-7EA6-4C7C-A735-D3E1B90FB191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,7 +75,6 @@ Global
 		{D0982D8F-0BAA-4099-9421-741A2379EF6D} = {8B83548F-7EB5-4A07-8EB6-07C145D99EEF}
 		{238FFF0C-A42D-4EA9-80C5-9A831395A365} = {96D80793-05EB-411F-8610-32446C30A7B9}
 		{8A47EE4C-A240-47E5-B576-D7CA5606B682} = {D7B60425-871E-4D6F-871E-1D2AD0BD90F1}
-		{3D55B001-7EA6-4C7C-A735-D3E1B90FB191} = {D7B60425-871E-4D6F-871E-1D2AD0BD90F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {648EF0B2-DA18-47C0-85E0-B7E98756051A}

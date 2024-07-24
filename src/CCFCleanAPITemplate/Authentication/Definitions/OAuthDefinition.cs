@@ -37,7 +37,7 @@ public class OAuthDefinition : IEndpointDefinition
 				};
 			})
 			.Services.AddAuthorizationBuilder()
-			.AddPolicy("cusotmPolicy", policy =>
+			.AddPolicy("customPolicy", policy =>
 			{
 				policy.RequireClaim("scope", OauthConfig.Scope ?? string.Empty);
 			});

@@ -2,10 +2,13 @@
 using Asp.Versioning;
 using Domain.Configs.User;
 using OpenApi.Summaries.User;
+using Infrastructure.Services;
 using Wrapper = Shared.Wrapper;
 using CCFClean.Minimal.Definition;
+using Application.Interfaces.Services;
 using Application.Features.Users.Dtos;
 using Application.Features.Users.Queries;
+using CCFCleanAPITemplate.Authentication;
 using CCFClean.Minimal.Definition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.ApiEndpoints.V2;
@@ -20,11 +23,14 @@ public class UserEndpoints : IEndpointDefinition
 		GetById(builderDefination.RouteBuilder, mapToApiVersion);
 	}
 
+	// Register dependencies in DI related to this class/functionality.
 	public void DefineServices(WebApplicationBuilder builder)
 	{
-		builder.Services.AddOptions<UserConfig>()
-						.Bind(builder.Configuration.GetSection(nameof(UserConfig)))
-						.ValidateDataAnnotations();
+		builder.Services
+			.AddTransient<IUserService, UserService>()
+			.AddOptions<UserConfig>()
+				.Bind(builder.Configuration.GetSection(nameof(UserConfig)))
+				.ValidateDataAnnotations();
 	}
 
 	private static void GetAll(IEndpointRouteBuilder endpoint, ApiVersion mapToApiVersion)
@@ -35,7 +41,7 @@ public class UserEndpoints : IEndpointDefinition
 		})
 		.GetUserFromApiEndpointSummary<Wrapper.Result<List<UserDto>>>()
 		.MapToApiVersion(mapToApiVersion)
-		.RequireAuthorization();
+		.Authorize("customPolicy");
 	}
 
 	private static void GetById(IEndpointRouteBuilder endpoint, ApiVersion mapToApiVersion)
@@ -45,9 +51,9 @@ public class UserEndpoints : IEndpointDefinition
 			var user = await sender.Send(new GetUserByAPIQuery());
 			return Results.Ok("Deprecated");
 		})
-		.WithMetadata(new EndpointDeprecateAttribute("This endpoint is Deprecated"))
+		.WithMetadata(new ApiEndpointDeprecate("This endpoint is Deprecated"))
 		.GetUserbyIdFromApiEndpointSummary<Wrapper.Result<UserDto>>()
 		.MapToApiVersion(mapToApiVersion)
-		.RequireAuthorization();
+		.Authorize();
 	}
 }

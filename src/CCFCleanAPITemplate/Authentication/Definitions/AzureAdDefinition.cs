@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CCFCleanAPITemplate.Authentication.Definitions;
 
-[EndpointDefinitionDeprecate("Definition Deprecated")]
+[DefinitionDeprecate("Definition Deprecated")]
 public class AzureAdDefinition : IEndpointDefinition
 {
     public void DefineEndpoints(AppBuilderDefinition builderDefination)

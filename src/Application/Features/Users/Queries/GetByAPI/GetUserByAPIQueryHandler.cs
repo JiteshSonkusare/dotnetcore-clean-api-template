@@ -2,27 +2,24 @@
 using AutoMapper;
 using Shared.Wrapper;
 using Application.Features.Users.Dtos;
-using Application.Interfaces.Repositories;
+using Application.Interfaces.Services;
 using Application.Common.ExceptionHandlers;
 
 namespace Application.Features.Users.Queries;
 
-internal class GetUserByAPIQueryHandler : IRequestHandler<GetUserByAPIQuery, Result<List<UserDto>>>
+internal class GetUserByAPIQueryHandler(
+	IMapper mapper, 
+	IUserService userService) 
+	: IRequestHandler<GetUserByAPIQuery, Result<List<UserDto>>>
 {
-	private readonly IUserRepository _userRepository;
-	private readonly IMapper _mapper;
-
-	public GetUserByAPIQueryHandler(IUserRepository userRepository, IMapper mapper)
-	{
-		_userRepository = userRepository;
-		_mapper = mapper;
-	}
+	private readonly IMapper _mapper = mapper;
+	private readonly IUserService _userService = userService;
 
 	public async Task<Result<List<UserDto>>> Handle(GetUserByAPIQuery request, CancellationToken cancellationToken)
 	{
 		try
 		{
-			var response = await _userRepository.GetUsersFromApiCall(cancellationToken);
+			var response = await _userService.GetUsersFromApiCall(cancellationToken);
 			if (response.Data?.Data == null)
 				return Result.Failure<List<UserDto>>(UserError.NotFound);
 			var mappedUser = _mapper.Map<List<UserDto>>(response.Data?.Data);
