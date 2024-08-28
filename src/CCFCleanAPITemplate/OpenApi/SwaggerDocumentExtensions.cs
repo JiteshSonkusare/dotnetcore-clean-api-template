@@ -1,4 +1,5 @@
 ﻿using CCFClean.Swagger;
+using Microsoft.OpenApi.Models;
 using CCFClean.Swagger.Configurations;
 
 namespace CCFCleanAPITemplate.OpenApi;
@@ -30,6 +31,14 @@ internal static class SwaggerDocumentExtensions
 			{
 				IsSecured = true,
 				NonSecuredVersions = ["v1"]
+			};
+			opt.SecuritySchemeParams = new SecuritySchemeParams
+			{
+				Scheme = "ApiKey",
+				Name = "x-api-key",
+				Description = "The API Key to access the API",
+				SecuritySchemeType = SecuritySchemeType.ApiKey,
+				ParameterLocation = ParameterLocation.Header,
 			};
 			opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
 			opt.EnableGlobalHeader = true;

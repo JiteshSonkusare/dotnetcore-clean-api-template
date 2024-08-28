@@ -16,15 +16,16 @@ public static class AuthExceptionHandlerMiddleware
 				await next();
 				if (httpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized || httpContext.Response.StatusCode == (int)HttpStatusCode.Forbidden)
 				{
+					var message = httpContext.Items.TryGetValue("UnauthorizedMessage", out var messageObj) ? messageObj : null;
 					httpContext.Response.ContentType = MediaTypeNames.Application.ProblemJson;
 					await httpContext.Response.WriteAsync(
 						JsonSerializer.Serialize(
-							CreateProblemDetails(httpContext)));
+							CreateProblemDetails(httpContext, message)));
 				}
 			});
 	}
 
-	private static ProblemDetails CreateProblemDetails(in HttpContext httpContext)
+	private static ProblemDetails CreateProblemDetails(in HttpContext httpContext, object? details = null)
 	{
 		var problemDetails = new ProblemDetails
 		{
@@ -33,7 +34,7 @@ public static class AuthExceptionHandlerMiddleware
 			Instance = httpContext.Request.Path,
 		};
 		problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;
-		problemDetails.Detail = "Invalid access token";
+		problemDetails.Detail = details?.ToString() ?? "Invalid access token";
 
 		return problemDetails;
 	}

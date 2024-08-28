@@ -2,9 +2,11 @@
 using CCFClean.Minimal.Definition;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using CCFClean.Minimal.Definition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.Authentication.Definitions;
 
+[DefinitionDeprecate("Definition Deprecated")]
 public class OAuthDefinition : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)

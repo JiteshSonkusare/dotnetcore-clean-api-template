@@ -15,7 +15,7 @@ using Application.Features.Users.Queries.GetAll;
 using Application.Features.Users.Queries.GetById;
 
 namespace CCFCleanAPITemplate.ApiEndpoints.V1;
-
+public record InteractionByUUIdRequest(string? UUId, string? ANI);
 public class UserEndpoints : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
@@ -25,7 +25,9 @@ public class UserEndpoints : IEndpointDefinition
 
 		//Get: GetAll
 		endpoint.MapGet("users", async (
-			ISender sender) =>
+			ISender sender,
+			[AsParameters] InteractionByUUIdRequest request,
+			IGlobalHeaders globalHeaders) =>
 		{
 			var result = await sender.Send(new GetAllUserQuery());
 

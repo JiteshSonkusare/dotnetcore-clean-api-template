@@ -41,7 +41,8 @@ public class UserEndpoints : IEndpointDefinition
 		})
 		.GetUserFromApiEndpointSummary<Wrapper.Result<List<UserDto>>>()
 		.MapToApiVersion(mapToApiVersion)
-		.Authorize("customPolicy");
+		.AddEndpointFilter<ApiKeyAuthenticationFilter>(); // Use for Apikey authentication
+		//.Authorize("customPolicy"); // Use this for OAuht and AzureAd authentication
 	}
 
 	private static void GetById(IEndpointRouteBuilder endpoint, ApiVersion mapToApiVersion)
@@ -54,6 +55,7 @@ public class UserEndpoints : IEndpointDefinition
 		.WithMetadata(new ApiEndpointDeprecate("This endpoint is Deprecated"))
 		.GetUserbyIdFromApiEndpointSummary<Wrapper.Result<UserDto>>()
 		.MapToApiVersion(mapToApiVersion)
-		.Authorize();
+		.AddEndpointFilter<ApiKeyAuthenticationFilter>(); // Use for Apikey authentication
+		//.Authorize("customPolicy"); // Use this for OAuht and AzureAd authentication
 	}
 }
