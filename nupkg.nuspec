@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>CCF.Clean.Dotnet.WebAPI</id>
-        <version>4.2.0</version>
+        <version>4.3.0</version>
         <title>CCF Clean Web API</title>
         <license type="file">LICENSE</license>
         <description>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging Swagger and API versioning.</description>
@@ -15,7 +15,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>CCF © 2023</copyright>
         <summary>A ready-to-use project template for creating ASP.NET Core Minimal API, which supports CQRS, MediatR, repositories, model mapping, validations, dependency injection, Response Handling, Caching, Logging, Swagger and API versioning.</summary>
-        <releaseNotes>All dependency versions are updated and global header functionality added.</releaseNotes>
+        <releaseNotes>Added API key authentication support.</releaseNotes>
         <repository type="git" url="https://github.com/JiteshSonkusare/dotnetcore-clean-api-template"/>
         <packageTypes>
             <packageType name="Template" />
