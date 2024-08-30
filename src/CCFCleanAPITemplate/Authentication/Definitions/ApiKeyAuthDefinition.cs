@@ -25,7 +25,7 @@ public class ApiKeyAuthDefinition : IEndpointDefinition
 		//builder.Services.ConfigureApiKeyAuthentication(options =>
 		//{
 		//	options.WithHeaderName("x-api-key")
-		//	       .WithApiKey("my-secret-api-key");
+		//	       .WithApiKey("secret-api-key");
 		//})
 		//.AddAuthorizationBuilder();
 	}

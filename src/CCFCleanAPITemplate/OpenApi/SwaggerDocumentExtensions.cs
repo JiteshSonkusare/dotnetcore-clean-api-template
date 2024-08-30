@@ -37,7 +37,7 @@ internal static class SwaggerDocumentExtensions
 			#region This section need for APIKey Authnetication
 			opt.SecuritySchemeParams = new SecuritySchemeParams
 			{
-				Name = ApiKeyAuthenticationConfig.ApiKeyHeaderName ?? "x-api-key",
+				Name = ApiKeyAuthenticationConfig.ApiKeyHeaderName,
 				Description = "The API Key to access the API",
 				SecuritySchemeType = SecuritySchemeType.ApiKey,
 				ParameterLocation = ParameterLocation.Header,
