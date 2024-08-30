@@ -8,7 +8,7 @@ using CCFClean.Minimal.Definition;
 using Application.Interfaces.Services;
 using Application.Features.Users.Dtos;
 using Application.Features.Users.Queries;
-using CCFCleanAPITemplate.Authentication;
+using CCFCleanMinimalApiLib.ApiKeyAuthentication;
 using CCFClean.Minimal.Definition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.ApiEndpoints.V2;

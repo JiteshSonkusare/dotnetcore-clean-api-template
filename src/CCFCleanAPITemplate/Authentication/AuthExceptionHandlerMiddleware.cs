@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
+using CCFCleanMinimalApiLib.ApiKeyAuthentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 
@@ -16,7 +17,9 @@ public static class AuthExceptionHandlerMiddleware
 				await next();
 				if (httpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized || httpContext.Response.StatusCode == (int)HttpStatusCode.Forbidden)
 				{
-					var message = httpContext.Items.TryGetValue("UnauthorizedMessage", out var messageObj) ? messageObj : null;
+					var message = httpContext.Items.TryGetValue(ApiKeyAuthenticationConstants.UnauthorizedMessage, out
+						var messageObj) ? messageObj : null;
+
 					httpContext.Response.ContentType = MediaTypeNames.Application.ProblemJson;
 					await httpContext.Response.WriteAsync(
 						JsonSerializer.Serialize(

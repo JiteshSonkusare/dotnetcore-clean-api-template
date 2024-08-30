@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCFClean.Minimal.Definition" Version="2.3.0" />
+    <PackageReference Include="CCFClean.Minimal.Definition" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Microsoft.Identity.Web" Version="3.1.0" />
     <PackageReference Include="NLog.Schema" Version="5.3.3" />

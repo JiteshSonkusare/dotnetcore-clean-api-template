@@ -1,6 +1,7 @@
 ﻿using CCFClean.Swagger;
 using Microsoft.OpenApi.Models;
 using CCFClean.Swagger.Configurations;
+using CCFCleanMinimalApiLib.ApiKeyAuthentication;
 
 namespace CCFCleanAPITemplate.OpenApi;
 
@@ -32,14 +33,18 @@ internal static class SwaggerDocumentExtensions
 				IsSecured = true,
 				NonSecuredVersions = ["v1"]
 			};
+
+			#region This section need for APIKey Authnetication
 			opt.SecuritySchemeParams = new SecuritySchemeParams
 			{
-				Scheme = "ApiKey",
-				Name = "x-api-key",
+				Name = ApiKeyAuthenticationConfig.ApiKeyHeaderName ?? "x-api-key",
 				Description = "The API Key to access the API",
 				SecuritySchemeType = SecuritySchemeType.ApiKey,
 				ParameterLocation = ParameterLocation.Header,
+				Scheme = "ApiKey",
 			};
+			#endregion
+			
 			opt.ServerPathFilters = configuration.GetSection("ServerPathFilters").Get<ServerPathFilters>();
 			opt.EnableGlobalHeader = true;
 		});
