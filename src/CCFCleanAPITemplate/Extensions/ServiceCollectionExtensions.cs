@@ -3,7 +3,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using CCFCleanAPITemplate.ExceptionHandler;
 
-namespace API.Extensions;
+namespace CCFCleanAPITemplate.Extensions;
 
 public static class ServiceCollectionExtensions
 {

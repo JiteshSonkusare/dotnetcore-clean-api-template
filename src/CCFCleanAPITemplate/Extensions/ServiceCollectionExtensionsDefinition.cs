@@ -3,7 +3,7 @@ using Application.Extensions;
 using Infrastructure.Extensions;
 using CCFClean.Minimal.Definition;
 
-namespace API.Extensions;
+namespace CCFCleanAPITemplate.Extensions;
 
 public class ServiceCollectionExtensionsDefinition : IEndpointDefinition
 {

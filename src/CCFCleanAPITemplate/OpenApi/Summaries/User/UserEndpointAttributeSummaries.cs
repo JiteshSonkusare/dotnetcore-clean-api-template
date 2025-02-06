@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CCFClean.Swagger.Summaries;
 
-namespace OpenApi.Summaries.User;
+namespace CCFCleanAPITemplate.OpenApi.Summaries.User;
 
 public static class UserEndpointAttributeSummaries
 {

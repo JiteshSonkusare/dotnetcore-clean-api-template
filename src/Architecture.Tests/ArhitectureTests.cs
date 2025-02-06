@@ -31,7 +31,7 @@ public class ArhitectureTests
 			.GetResult();
 
 		// Assert
-		Assert.True(testResult.IsSuccessful);
+		Assert.That(testResult.IsSuccessful);
 	}
 
 	[Test]
@@ -54,7 +54,7 @@ public class ArhitectureTests
 			.GetResult();
 
 		// Assert
-		Assert.True(testResult.IsSuccessful);
+		Assert.That(testResult.IsSuccessful);
 	}
 
 	[Test]
@@ -76,6 +76,6 @@ public class ArhitectureTests
 			.GetResult();
 
 		// Assert
-		Assert.True(testResult.IsSuccessful);
+		Assert.That(testResult.IsSuccessful);
 	}
 }

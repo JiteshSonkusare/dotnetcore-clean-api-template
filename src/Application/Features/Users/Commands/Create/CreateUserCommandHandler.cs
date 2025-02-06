@@ -2,7 +2,6 @@
 using AutoMapper;
 using Shared.Wrapper;
 using Domain.Entities;
-using Application.Common.Exceptions;
 using Application.Resources.Constants;
 using Application.Interfaces.Repositories;
 using Application.Common.ExceptionHandlers;

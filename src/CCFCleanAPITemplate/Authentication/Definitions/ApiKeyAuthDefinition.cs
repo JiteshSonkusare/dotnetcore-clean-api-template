@@ -1,8 +1,7 @@
 ﻿using CCFClean.Minimal.Definition;
-using CCFCleanAPITemplate.Authentication;
 using CCFCleanMinimalApiLib.ApiKeyAuthentication;
 
-namespace DnbCustomerLookupPartnerApi.Authentication.EndpointDefinition;
+namespace CCFCleanAPITemplate.Authentication.EndpointDefinition;
 
 public class ApiKeyAuthDefinition : IEndpointDefinition
 {

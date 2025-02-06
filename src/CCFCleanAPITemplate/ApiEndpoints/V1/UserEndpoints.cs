@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Asp.Versioning;
 using Shared.Wrapper;
-using OpenApi.Summaries.User;
 using Microsoft.AspNetCore.Mvc;
-using Wrapper = Shared.Wrapper;
 using CCFClean.Minimal.Definition;
 using Infrastructure.Respositories;
 using CCFClean.Minimal.CustomHeader;
@@ -13,9 +11,10 @@ using Application.Features.Users.Commands;
 using Application.Interfaces.Repositories;
 using Application.Features.Users.Queries.GetAll;
 using Application.Features.Users.Queries.GetById;
+using CCFCleanAPITemplate.OpenApi.Summaries.User;
 
 namespace CCFCleanAPITemplate.ApiEndpoints.V1;
-public record InteractionByUUIdRequest(string? UUId, string? ANI);
+
 public class UserEndpoints : IEndpointDefinition
 {
 	public void DefineEndpoints(AppBuilderDefinition builderDefination)
@@ -25,9 +24,7 @@ public class UserEndpoints : IEndpointDefinition
 
 		//Get: GetAll
 		endpoint.MapGet("users", async (
-			ISender sender,
-			[AsParameters] InteractionByUUIdRequest request,
-			IGlobalHeaders globalHeaders) =>
+			ISender sender) =>
 		{
 			var result = await sender.Send(new GetAllUserQuery());
 
@@ -35,7 +32,7 @@ public class UserEndpoints : IEndpointDefinition
 				onSuccess: users => Results.Ok(users),
 				onFailure: error => Results.NotFound(error));
 		})
-		.GetAllUserEndpointSummary<Wrapper.Result<List<UserDto>>>()
+		.GetAllUserEndpointSummary<Result<List<UserDto>>>()
 		.MapToApiVersion(mapToApiVersion);
 
 		//Get: GetById
@@ -49,7 +46,7 @@ public class UserEndpoints : IEndpointDefinition
 				onSuccess: user => Results.Ok(user),
 				onFailure: error => Results.NotFound(error));
 		})
-		.GetUserByIdEndpointSummary<Wrapper.Result<UserDto>>()
+		.GetUserByIdEndpointSummary<Result<UserDto>>()
 		.MapToApiVersion(mapToApiVersion);
 
 
@@ -57,14 +54,15 @@ public class UserEndpoints : IEndpointDefinition
 		endpoint.MapPost("users/create", async (
 			CreateUserRequest request,
 			ISender sender,
-			IGlobalHeaders globalHeaders) =>
+			IGlobalHeaders globalHeaders,
+			[FromHeader] string UserId) =>
 		{
 			var headers = (GlobalHeaders)globalHeaders;
 
 			var command = new CreateUserCommand(
 				request.FirstName,
 				request.LastName,
-				headers.UserId,
+                UserId,
 				request.Mobile,
 				request.Phone,
 				request.Address,
@@ -76,7 +74,7 @@ public class UserEndpoints : IEndpointDefinition
 			return Results.Created();
 
 		})
-		.CreateUserEndpointSummary<Wrapper.Result<Guid>>()
+		.CreateUserEndpointSummary<Result<Guid>>()
 		.MapToApiVersion(mapToApiVersion);
 
 
@@ -84,7 +82,8 @@ public class UserEndpoints : IEndpointDefinition
 		endpoint.MapPut("users/update", async (
 			[FromBody] UpdateUserRequest request,
 			ISender sender,
-			HttpContext httpContext) =>
+			HttpContext httpContext,
+            [FromHeader] string UserId) =>
 		{
 			var headers = httpContext.Items[typeof(GlobalHeaders)] as GlobalHeaders;
 
@@ -92,7 +91,7 @@ public class UserEndpoints : IEndpointDefinition
 				request.Id,
 				request.FirstName,
 				request.LastName,
-				headers?.UserId,
+				UserId,
 				request.Mobile,
 				request.Phone,
 				request.Address,
@@ -105,9 +104,8 @@ public class UserEndpoints : IEndpointDefinition
 				onSuccess: (id) => Results.NoContent(),
 				onFailure: error => Results.NotFound(result));
 		})
-		.UdpateUserEndpointSummary<Wrapper.Result<Guid>>()
+		.UdpateUserEndpointSummary<Result<Guid>>()
 		.MapToApiVersion(mapToApiVersion);
-
 
 		// Delete: Delete
 		endpoint.MapDelete("users/delete/{id:guid}", async (
@@ -120,11 +118,11 @@ public class UserEndpoints : IEndpointDefinition
 				onSuccess: id => Results.NoContent(),
 				onFailure: error => Results.NotFound(error));
 		})
-		.DeleteUserEndpointSummary<Wrapper.Result<Guid>>()
+		.DeleteUserEndpointSummary<Result<Guid>>()
 		.MapToApiVersion(mapToApiVersion);
 	}
 
-	// Add dependencies to DI related to this class/functionality.
+	// Register DI related to this class/functionality.
 	public void DefineServices(WebApplicationBuilder builder)
 	{
 		builder.Services

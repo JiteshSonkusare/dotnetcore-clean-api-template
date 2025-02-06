@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using Asp.Versioning;
+using Shared.Wrapper;
 using Domain.Configs.User;
-using OpenApi.Summaries.User;
 using Infrastructure.Services;
-using Wrapper = Shared.Wrapper;
 using CCFClean.Minimal.Definition;
 using Application.Interfaces.Services;
 using Application.Features.Users.Dtos;
 using Application.Features.Users.Queries;
 using CCFCleanMinimalApiLib.ApiKeyAuthentication;
+using CCFCleanAPITemplate.OpenApi.Summaries.User;
 using CCFClean.Minimal.Definition.CustomAttributes;
 
 namespace CCFCleanAPITemplate.ApiEndpoints.V2;
@@ -39,7 +39,7 @@ public class UserEndpoints : IEndpointDefinition
 		{
 			return Results.Ok(await sender.Send(new GetUserByAPIQuery()));
 		})
-		.GetUserFromApiEndpointSummary<Wrapper.Result<List<UserDto>>>()
+		.GetUserFromApiEndpointSummary<Result<List<UserDto>>>()
 		.MapToApiVersion(mapToApiVersion)
 		.AddEndpointFilter<ApiKeyAuthenticationFilter>(); // Use for Apikey authentication
 		//.Authorize("customPolicy"); // Use this for OAuht and AzureAd authentication
@@ -53,7 +53,7 @@ public class UserEndpoints : IEndpointDefinition
 			return Results.Ok("Deprecated");
 		})
 		.WithMetadata(new ApiEndpointDeprecate("This endpoint is Deprecated"))
-		.GetUserbyIdFromApiEndpointSummary<Wrapper.Result<UserDto>>()
+		.GetUserbyIdFromApiEndpointSummary<Result<UserDto>>()
 		.MapToApiVersion(mapToApiVersion)
 		.AddEndpointFilter<ApiKeyAuthenticationFilter>(); // Use for Apikey authentication
 		//.Authorize("customPolicy"); // Use this for OAuht and AzureAd authentication

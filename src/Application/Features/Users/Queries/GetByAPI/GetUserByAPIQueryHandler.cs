@@ -20,9 +20,9 @@ internal class GetUserByAPIQueryHandler(
 		try
 		{
 			var response = await _userService.GetUsersFromApiCall(cancellationToken);
-			if (response.Data?.Data == null)
+            if (response.IsFailure)
 				return Result.Failure<List<UserDto>>(UserError.NotFound);
-			var mappedUser = _mapper.Map<List<UserDto>>(response.Data?.Data);
+			var mappedUser = _mapper.Map<List<UserDto>>(response.Data);
 			return Result.Success(mappedUser);
 		}
 		catch (Exception ex)
